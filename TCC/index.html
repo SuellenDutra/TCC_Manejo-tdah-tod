@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pr-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de Login</title>
+
+    <!-- icones (cadeado, email, etc.) da internet -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="login-container"> <!-- centraliza tudo no meio -->
+        
+        <!-- logo -->
+        <img src="Figuras/Logo1.png" alt="Logo Projeto Teia" class="logo">
+        
+        <h1 class="titulo">Bem-vindo</h1>
+        <p class="subtitulo">Educação com foco e cuidado</p>
+
+        <div class="opcoes-perfil">
+            
+            <div class="cartao-perfil">
+                <div class="icone-azul"><i class="fa-solid fa-school"></i></div>
+                <span>Educador</span>
+            </div>
+            
+            <div class="cartao-perfil">
+                <div class="icone-verde"><i class="fa-solid fa-house"></i></div>
+                <span>Familiar</span>
+            </div>
+            
+        </div>
+
+        <form class="formulario">
+            
+            <!--email-->
+            <div class="grupo-input">
+                <i class="fa-regular fa-envelope icone-input"></i>
+                <input type="email" placeholder="Email">
+            </div>
+
+            <!--senha-->
+            <div class="grupo-input"> <!-- Agrupa o ícone de cadeado e a caixa de digitar senha -->
+                <i class="fa-solid fa-lock icone-input"></i> <!-- Ícone de cadeado (senha) -->
+                <input type="password" placeholder="Senha"> <!-- Caixa de senha (esconde os caracteres) -->
+            </div>
+
+            <!--recuperar senha-->
+           <div class="esqueceu-senha">
+            <a href="recuperar-senha.html">Esqueceu a senha?</a>
+        </div>
+
+            <!--entrar-->
+            <button type="submit" class="btn-entrar" disabled>Entrar</button>
+
+        </form>
+
+       
+        <div class="texto-cadastro">
+            <p>Não tem uma conta? <a href="cadastro-usuario.html">Cadastre-se</a></p>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>

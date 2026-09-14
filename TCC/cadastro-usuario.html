@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Conta</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="login-container container-largo">
+        <h1 class="titulo">Criar Nova Conta</h1>
+        <p class="subtitulo">Preencha os dados abaixo para acessar o sistema.</p>
+
+        <form class="formulario" action="index.html">
+            
+            <div class="grupo-input">
+                <i class="fa-regular fa-user icone-input"></i>
+                <input type="text" placeholder="Seu nome completo" required>
+            </div>
+
+            <div class="grupo-input">
+                <i class="fa-regular fa-envelope icone-input"></i>
+                <input type="email" placeholder="Seu melhor e-mail" required>
+            </div>
+
+            <div class="grupo-input">
+                <i class="fa-solid fa-lock icone-input"></i>
+                <input type="password" placeholder="Crie uma senha segura" required>
+            </div>
+
+            <div class="grupo-input grupo-perfil">
+                <label class="rotulo rotulo-perfil">Eu sou:</label>
+                <div class="input-com-icone">
+                    <i class="fa-solid fa-id-card icone-input"></i>
+                    <select required>
+                        <option value="" disabled selected>Selecione seu perfil...</option>
+                        <option value="educador">Educador(a) / Professor(a)</option>
+                        <option value="familiar">Familiar / Responsável</option>
+                    </select>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-entrar btn-espaco">
+                Finalizar Cadastro
+            </button>
+        </form>
+
+        <div class="texto-cadastro">
+            <p>Já possui uma conta? <a href="index.html">Fazer login</a></p>
+        </div>
+    </div>
+
+</body>
+</html>

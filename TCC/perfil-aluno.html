@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil do Aluno</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="fundo-painel">
+
+    <div class="painel-container">
+        
+        <div class="cabecalho-cadastro">
+            <a href="turma.html" class="link-voltar">
+                <i class="fa-solid fa-arrow-left"></i> Voltar para a Turma
+            </a>
+            
+            <h1 class="titulo-painel" id="nome-aluno-titulo">Carregando...</h1>
+            <p class="subtitulo info-matricula" id="matricula-aluno-texto">Matrícula: ...</p>
+            <p class="subtitulo info-diagnostico" id="neuro-aluno-texto">Diagnóstico: ...</p>
+        </div>
+
+        <div class="botoes-acao-perfil">
+            <a href="registro-ocorrencia.html" class="btn-nova-ocorrencia">
+                <i class="fa-solid fa-plus"></i>
+                Registrar Ocorrência
+            </a>
+            
+            <!--relatorio-->
+            <button id="btn-gerar-relatorio" class="btn-secundario">
+                <i class="fa-solid fa-file-pdf"></i>
+                Gerar Relatório
+            </button>
+        </div>
+
+        <h2 class="titulo-historico">
+            <i class="fa-solid fa-list-ul"></i> Histórico Recente
+        </h2>
+        
+        <div id="container-timeline">
+        </div>
+
+    </div>
+
+    <script src="perfil-aluno.js"></script>
+
+</body>
+</html>
