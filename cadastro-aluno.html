@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Aluno - Painel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="fundo-painel">
+
+    <div class="painel-container">
+        
+        <div class="cabecalho-cadastro">
+            <a href="turma.html" class="link-voltar">
+                <i class="fa-solid fa-arrow-left"></i> Voltar para a Turma
+            </a>
+            <h1 class="titulo-painel">Cadastrar Novo Aluno</h1>
+            <p class="subtitulo">Preencha os dados para vincular o estudante e o responsável.</p>
+        </div>
+
+       <form class="formulario" id="form-cadastro">
+
+                <div class="grupo-input">
+                    <label class="rotulo">Nome completo do aluno</label>
+                    <div class="input-com-icone">
+                        <i class="fa-regular fa-user icone-input"></i>
+                        <input type="text" id="nome-aluno" placeholder="Ex: Lucas Silva" required>
+                    </div>
+                </div>
+
+                <div class="grupo-input">
+                    <label class="rotulo">Matrícula</label>
+                    <div class="input-com-icone">
+                        <i class="fa-solid fa-id-badge icone-input"></i>
+                        <input type="text" id="matricula-aluno" placeholder="Ex: 2026001" required>
+                    </div>
+                </div>
+
+                <div class="grupo-input">
+                    <label class="rotulo">Diagnóstico Principal</label>
+                    <div class="input-com-icone">
+                        <i class="fa-solid fa-brain icone-input"></i>
+                        <select id="neuro-aluno" required>
+                            <option value="" disabled selected>Selecione...</option>
+                            <option value="TDAH">TDAH</option>
+                            <option value="TOD">TOD</option>
+                            <option value="TDAH e TOD">TDAH e TOD</option>
+                            <option value="Autismo (TEA)">Autismo (TEA)</option>
+                            <option value="Nenhum / Em Investigação">Nenhum / Em Investigação</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grupo-input">
+                    <label class="rotulo">Turma</label>
+                    <div class="input-com-icone">
+                        <i class="fa-solid fa-users-viewfinder icone-input"></i>
+                        <!-- Adicionado id="turma-aluno" -->
+                        <select id="turma-aluno" required>
+                            <option value="" disabled selected>Selecione a turma...</option>
+                            <option value="1º Ano">1º Ano</option>
+                            <option value="2º Ano">2º Ano</option>
+                            <option value="3º Ano">3º Ano</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grupo-input">
+                    <label class="rotulo">E-mail do Familiar Responsável</label>
+                    <div class="input-com-icone">
+                        <i class="fa-regular fa-envelope icone-input"></i>
+                        <!-- Adicionado id="email-familiar" -->
+                        <input type="email" id="email-familiar" placeholder="E-mail do pai, mãe ou tutor" required>
+                    </div>
+                </div>
+
+                <!-- Adicionado id="btn-salvar" -->
+                <button type="submit" id="btn-salvar" class="btn-nova-ocorrencia btn-largo">
+                    <i class="fa-solid fa-check"></i>
+                    Salvar Cadastro
+                </button>
+
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="cadastro-aluno.js"></script>
+</body>
+</html>
+</body>
+</html>

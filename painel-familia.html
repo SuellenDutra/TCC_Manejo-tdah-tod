@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel da Família</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="fundo-painel">
+
+        <a href="#" id="btn-sair" class="btn-deslogar">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i> Sair e Voltar para o Login
+        </a>
+
+    <div class="painel-container">
+        
+        <div class="cabecalho-familia">
+            <div class="avatar-familia">
+                <i class="fa-solid fa-user-graduate icone-avatar"></i>
+            </div>
+            <h1 class="titulo-painel" id="nome-filho">Carregando...</h1>
+            <p class="subtitulo" id="info-filho">Buscando dados seguros...</p>
+        </div>
+
+        <h2 class="titulo-painel" style="font-size: 18px; margin-bottom: 15px;">
+            <i class="fa-solid fa-clock-rotate-left"></i> Atualizações Diárias
+        </h2>
+        
+        <div id="container-timeline-familia">
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <a href="index.html" class="link-voltar link-sair">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i> Sair do Aplicativo
+            </a>
+        </div>
+
+    </div>
+
+   <script type="module" src="painel-familia.js"></script>
+</body>
+</html>

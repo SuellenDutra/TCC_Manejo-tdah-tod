@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pr-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de Login</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="login-container"> 
+        
+        <img src="Figuras/Logo1.png" alt="Logo Projeto Teia" class="logo">
+        
+        <h1 class="titulo">Bem-vindo</h1>
+        <p class="subtitulo">Educação com foco e cuidado</p>
+
+       <div class="opcoes-perfil">
+            <div class="cartao-perfil" id="card-educador">
+                <div class="icone-azul"><i class="fa-solid fa-school"></i></div>
+                <span>Educador</span>
+            </div>
+            
+            <div class="cartao-perfil" id="card-familiar">
+                <div class="icone-verde"><i class="fa-solid fa-house"></i></div>
+                <span>Familiar</span>
+            </div>
+        </div>
+
+        <form class="formulario" id="form-login">
+            
+            <div class="grupo-input">
+                <i class="fa-regular fa-envelope icone-input"></i>
+                <input type="email" id="email-login" placeholder="Email" required>
+            </div>
+
+            <div class="grupo-input"> 
+                <i class="fa-solid fa-lock icone-input"></i> 
+                <input type="password" id="senha-login" placeholder="Senha" required> 
+            </div>
+
+           <div class="esqueceu-senha">
+            <a href="recuperar-senha.html">Esqueceu a senha?</a>
+           </div>
+
+            <button type="submit" id="btn-entrar" class="btn-entrar" disabled>Entrar</button>
+        </form>
+
+        <div class="texto-cadastro">
+            <p>Não tem uma conta? <a href="cadastro-usuario.html">Cadastre-se</a></p>
+        </div>
+    </div>
+
+    <script type="module" src="script.js"></script>
+
+</body>
+</html>

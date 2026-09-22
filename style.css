@@ -1,0 +1,836 @@
+
+/* =========================================
+   CONFIGURAÇÕES GERAIS E RESET
+   ========================================= */
+* {
+    margin: 0; 
+    padding: 0;
+    /* Garante que o espaçamento interno (padding) e as bordas não aumentem o tamanho total do elemento */
+    box-sizing: border-box; 
+    /* Fontes limpas, priorizando as que já estão instaladas no sistema do usuário */
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; 
+}
+
+body { 
+    background-color: #f5faff; 
+    /* Centraliza todo o conteúdo da página horizontal e verticalmente */
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    min-height: 100vh;
+}
+
+/* =========================================
+   TELA DE LOGIN
+   ========================================= */
+.login-container {
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.logo { 
+    width: 100px; 
+    height: 100px; 
+    /* Preenche o espaço perfeitamente, garantindo que a imagem não fique esticada ou achatada */
+    object-fit: cover; 
+    border-radius: 18px; 
+    margin-bottom: 20px;
+}
+
+.titulo {
+    color: #1E3A8A; 
+    font-size: 24px; 
+    margin-bottom: 5px; 
+}
+
+.subtitulo {
+    color: #0F172A;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+/* --- SELEÇÃO DE PERFIL (Educador / Familiar) --- */
+.opcoes-perfil {
+    display: flex; 
+    gap: 15px; /* Espaçamento entre os dois cartões */
+    width: 100%; 
+    margin-bottom: 30px; 
+}
+
+.cartao-perfil {
+    flex: 1; /* Faz os dois cartões dividirem o espaço disponível em partes iguais */
+    border: 1px solid #F1F5F9;
+    border-radius: 12px;
+    padding: 20px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: 0.2s; /* Suaviza a mudança de cor ao passar o mouse */
+}
+
+.cartao-perfil:hover {
+    border-color: #8cbbe1;
+}
+
+.cartao-perfil.ativo {
+    border-color: #8cbbe1;
+    background-color: #f8fbff; 
+}
+
+.cartao-perfil span {
+    font-size: 14px; 
+    color: #1a3c5a; 
+    font-weight: 500;
+}
+
+/* Fundo redondo para os ícones dos cartões */
+.icone-azul, .icone-verde {
+    width: 40px; 
+    height: 40px; 
+    border-radius: 50%; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    margin-bottom: 10px; 
+    font-size: 18px; 
+}
+
+.icone-azul {
+    background-color: #f0f7fb; 
+    color: #6b9bc6; 
+}
+
+.icone-verde {
+    background-color: #f2fbf6; 
+    color: #79c89a; 
+}
+
+/* --- FORMULÁRIO DE LOGIN --- */
+.formulario {
+    width: 100%; 
+}
+
+.grupo-input {
+    /* Necessário para posicionar o ícone de forma absoluta dentro desta área */
+    position: relative; 
+    margin-bottom: 15px; 
+}
+
+.icone-input {
+    position: absolute; 
+    left: 15px; 
+    top: 50%; 
+    /* Centraliza o ícone verticalmente de forma exata */
+    transform: translateY(-50%); 
+    color: #a4b3c1; 
+}
+
+.grupo-input input {
+    width: 100%; 
+    background-color: #f5f7f9; 
+    border: none; 
+    border-radius: 8px; 
+    /* O padding de 45px na esquerda evita que o texto digitado fique por cima do ícone */
+    padding: 15px 15px 15px 45px; 
+    font-size: 14px; 
+    color: #1a3c5a; 
+    outline: none; /* Remove a borda padrão de foco do navegador */
+}
+
+.grupo-input input:focus { 
+    border: 1px solid #8cbbe1; 
+}
+
+.esqueceu-senha {
+    text-align: right; 
+    margin-bottom: 20px; 
+}
+
+.esqueceu-senha a, .texto-cadastro a {
+    color: #1D4ED8; 
+    text-decoration: none; 
+    font-size: 13px; 
+}
+
+/* --- BOTÕES --- */
+.btn-entrar {
+    width: 100%; 
+    padding: 15px; 
+    background-color: #6b9bc6; 
+    color: white; 
+    border: none; 
+    border-radius: 8px; 
+    font-size: 16px; 
+    font-weight: bold; 
+    cursor: pointer; 
+    transition: 0.2s;
+}
+
+.btn-entrar:hover:not(:disabled) {
+    background-color: #5A8AC0; 
+}
+
+.btn-entrar:disabled {
+    background-color: #d8e0e8; 
+    /* Mostra o cursor de bloqueado para indicar que a ação ainda não é permitida */
+    cursor: not-allowed; 
+}
+
+.texto-cadastro {
+    margin-top: 30px; 
+    font-size: 13px; 
+    color: #1D4ED8; 
+}
+
+/* =========================================
+   PAINEL DA TURMA (Área Logada)
+   ========================================= */
+.fundo-painel {
+    background-color: #ffffff; 
+    display: block; /* Remove o comportamento flex centralizado para permitir rolagem vertical */
+    padding: 40px 20px; 
+}
+
+.painel-container {
+    width: 100%;
+    max-width: 1200px; 
+    margin: 0 auto; /* Centraliza o container principal na tela */
+}
+
+.cabecalho-painel {
+    margin-bottom: 40px; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: flex-start; 
+    gap: 20px; 
+}
+
+.titulo-painel {
+    color: #111827; 
+    font-size: 28px; 
+    font-weight: bold;
+}
+
+.btn-nova-ocorrencia {
+    background-color: #6B9BD1; 
+    color: white; 
+    border: none; 
+    padding: 12px 24px; 
+    border-radius: 12px; 
+    font-size: 16px;
+    cursor: pointer;
+    display: flex; 
+    align-items: center; 
+    gap: 10px; 
+    transition: 0.2s; 
+}
+
+.btn-nova-ocorrencia:hover {
+    background-color: #5A8AC0; 
+}
+
+/* --- LISTA DE ALUNOS --- */
+.grid-alunos {
+    display: grid; 
+    /* Cria 3 colunas de tamanhos iguais, ajustando-se automaticamente ao espaço */
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 20px; 
+}
+
+.cartao-aluno {
+    background-color: white;
+    border: 1px solid #E8F1F8; 
+    border-radius: 12px; 
+    padding: 24px; 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    cursor: pointer;
+    transition: all 0.2s; 
+}
+
+.cartao-aluno:hover {
+    border-color: #6B9BD1; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); 
+}
+
+.nome-aluno {
+    color: #111827; 
+    font-size: 16px;
+}
+
+/* Indicadores visuais de status (comportamento) */
+.bolinha-status {
+    width: 12px; 
+    height: 12px; 
+    border-radius: 50%; 
+}
+
+.status-bom { background-color: #A8D5BA; }
+.status-atencao { background-color: #FFD4A3; }
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 900px) {
+    /* Ajusta para 2 colunas em telas de tablet */
+    .grid-alunos {
+        grid-template-columns: repeat(2, 1fr); 
+    }
+}
+
+@media (max-width: 600px) {
+    /* Ajusta para coluna única em telas de celular */
+    .grid-alunos {
+        grid-template-columns: 1fr; 
+    }
+    
+    .btn-nova-ocorrencia {
+        width: 100%; 
+        justify-content: center; 
+    }
+}
+
+.botoes-acao {
+    display: flex; 
+    gap: 15px; 
+    flex-wrap: wrap; /* Permite que os botões quebrem linha se faltar espaço */
+}
+
+.btn-secundario {
+    background-color: white; 
+    color: #6B9BD1; 
+    border: 2px solid #6B9BD1; 
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: 0.2s;
+}
+
+.btn-secundario:hover {
+    background-color: #f0f7fb; 
+}
+
+/* =========================================
+   TELA: CADASTRO DE ALUNO
+   ========================================= */
+.cabecalho-cadastro {
+    margin-bottom: 30px;
+}
+
+.link-voltar {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #6B9BD1;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 20px;
+    transition: 0.2s;
+}
+
+.link-voltar:hover {
+    color: #1a3c5a; 
+}
+
+.caixa-formulario {
+    background-color: white;
+    border: 1px solid #E8F1F8;
+    border-radius: 12px;
+    padding: 30px;
+    max-width: 500px; 
+    margin: 0 auto; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+}
+
+.rotulo {
+    display: block;
+    font-size: 14px;
+    color: #1a3c5a;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.input-com-icone {
+    position: relative;
+    width: 100%;
+}
+
+.input-com-icone input, .input-com-icone select {
+    width: 100%;
+    background-color: #f5f7f9;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    padding: 15px 15px 15px 45px; 
+    font-size: 14px;
+    color: #111827;
+    outline: none;
+    transition: 0.2s;
+    /* Remove a seta padrão nativa do select para um design mais limpo */
+    appearance: none; 
+}
+
+.input-com-icone input:focus, .input-com-icone select:focus {
+    border-color: #6B9BD1;
+    background-color: white;
+}
+
+.btn-largo {
+    width: 100%; 
+    justify-content: center; 
+    margin-top: 10px;
+}
+
+/* =========================================
+   PERFIL DO ALUNO
+   ========================================= */
+.info-matricula {
+    margin-bottom: 5px; 
+}
+
+.info-diagnostico {
+    color: #6B9BD1; 
+    font-weight: 600; 
+}
+
+.area-historico-vazia {
+    max-width: 100%; 
+    text-align: center; 
+    padding: 50px; 
+    color: #a4b3c1;
+}
+
+.icone-relogio {
+    font-size: 32px; 
+    margin-bottom: 15px;
+}
+
+/* =========================================
+   REGISTRO ÁGIL (CHIPS)
+   ========================================= */
+.container-chips {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 10px;
+}
+
+.chip {
+    background-color: white;
+    border: 1px solid #d1d5db;
+    color: #4b5563;
+    padding: 8px 16px;
+    border-radius: 20px; 
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.chip:hover {
+    background-color: #f3f4f6;
+}
+
+/* Classe aplicada via JavaScript quando o elemento é selecionado */
+.chip.selecionado {
+    background-color: #e6f0f9;
+    border-color: #6B9BD1;
+    color: #1a3c5a;
+    font-weight: 600;
+}
+
+.input-area {
+    width: 100%;
+    background-color: #f5f7f9;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    padding: 15px;
+    font-size: 14px;
+    color: #111827;
+    outline: none;
+    transition: 0.2s;
+    font-family: inherit;
+    /* Restringe o redimensionamento da área de texto apenas para o eixo vertical */
+    resize: vertical; 
+}
+
+.input-area:focus {
+    border-color: #6B9BD1;
+    background-color: white;
+}
+
+/* =========================================
+   SUGESTÕES DE MANEJO
+   ========================================= */
+.grid-sugestoes {
+    display: grid;
+    /* Ajusta as colunas dinamicamente dependendo da largura disponível, sem necessidade de media queries */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+    gap: 20px;
+}
+
+.cartao-sugestao {
+    background-color: #f0fdf4; 
+    border: 1px solid #bbf7d0;
+    border-radius: 12px;
+    padding: 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.icone-sugestao {
+    color: #10b981; 
+    font-size: 24px;
+    margin-top: 3px;
+}
+
+.titulo-sugestao {
+    font-size: 16px;
+    color: #065f46;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.texto-sugestao {
+    font-size: 13px;
+    color: #047857;
+    line-height: 1.5;
+}
+
+.btn-sucesso {
+    background-color: #10b981;
+    color: white;
+    border: none;
+    padding: 12px 40px;
+    border-radius: 25px; 
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+    box-shadow: 0 4px 6px rgba(16, 185, 129, 0.2); 
+}
+
+.btn-sucesso:hover {
+    background-color: #059669;
+}
+
+/* =========================================
+   LINHA DO TEMPO (TIMELINE)
+   ========================================= */
+#container-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; 
+    margin-bottom: 50px;
+}
+
+.cartao-timeline {
+    background-color: white;
+    border: 1px solid #E8F1F8;
+    border-left: 5px solid #6B9BD1; 
+    border-radius: 8px;
+    padding: 15px 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+}
+
+/* Categorias visuais do sistema */
+.timeline-alerta { border-left-color: #f59e0b; } 
+.timeline-positivo { border-left-color: #10b981; } 
+
+.timeline-icone {
+    font-size: 20px;
+    margin-top: 2px;
+}
+
+.icone-alerta { color: #f59e0b; }
+.icone-positivo { color: #10b981; }
+
+.timeline-conteudo {
+    flex: 1; 
+}
+
+.timeline-titulo {
+    font-size: 15px;
+    font-weight: 600;
+    color: #111827;
+    margin-bottom: 4px;
+}
+
+.timeline-desc {
+    font-size: 13px;
+    color: #4b5563;
+}
+
+.timeline-obs {
+    font-size: 13px;
+    color: #6b7280;
+    font-style: italic;
+    margin-top: 8px;
+    background-color: #f9fafb; 
+    padding: 8px;
+    border-radius: 6px;
+}
+
+.timeline-hora {
+    font-size: 12px;
+    color: #9ca3af;
+    font-weight: 500;
+    /* Impede que o texto de data/hora sofra quebra de linha em telas pequenas */
+    white-space: nowrap; 
+}
+
+/* =========================================
+   CONFIGURAÇÕES PARA IMPRESSÃO (PDF)
+   ========================================= */
+@media print {
+    /* Oculta elementos interativos que não fazem sentido no papel */
+    .link-voltar, 
+    .botoes-acao-perfil {
+        display: none !important;
+    }
+
+    body.fundo-painel {
+        background-color: white !important;
+    }
+
+    /* Remove limitações de largura para utilizar todo o espaço da página */
+    .painel-container {
+        box-shadow: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+    }
+
+    .cartao-timeline {
+        border: 1px solid #ddd !important;
+        /* Evita que o elemento seja cortado no meio durante uma quebra de página */
+        page-break-inside: avoid; 
+    }
+}
+
+/* =========================================
+   PAINEL DA FAMÍLIA E OUTROS
+   ========================================= */
+.cabecalho-familia {
+    text-align: center;
+    border-bottom: 1px solid #E8F1F8; 
+    padding-bottom: 20px;
+    margin-bottom: 20px;
+}
+
+.avatar-familia {
+    width: 60px;
+    height: 60px;
+    background-color: #e6f0f9;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 10px auto; 
+}
+
+.icone-avatar {
+    font-size: 24px;
+    color: #6B9BD1;
+}
+
+.link-sair {
+    color: #ef4444; 
+}
+
+.icone-sucesso-vazio {
+    font-size: 32px;
+    margin-bottom: 15px;
+    color: #10b981; 
+}
+
+.mensagem-erro {
+    color: #ef4444; 
+}
+
+.icone-erro {
+    font-size: 32px;
+    margin-bottom: 15px;
+}
+
+.container-largo {
+    max-width: 450px;
+}
+
+.btn-espaco {
+    margin-top: 10px;
+}
+
+.botoes-acao-perfil {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.titulo-historico {
+    font-size: 18px;
+    color: #1a3c5a;
+    margin-top: 40px;
+    margin-bottom: 15px;
+}
+
+/* =========================================
+   ESTILOS DE IMPRESSÃO (GERADOR DE RELATÓRIO)
+   ========================================= */
+@media print {
+    /* 1. Esconde os botões e links que não fazem sentido no papel/PDF */
+    .link-voltar,
+    .botoes-acao-perfil,
+    #btn-gerar-relatorio,
+    .btn-nova-ocorrencia {
+        display: none !important;
+    }
+
+    /* 2. Tira o fundo colorido e as sombras para ficar com cara de folha A4 limpa */
+    body, 
+    .fundo-painel, 
+    .painel-container {
+        background-color: white !important;
+        background: none !important;
+        box-shadow: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    /* 3. Garante que as fontes fiquem escuras e legíveis */
+    .titulo-painel, 
+    .subtitulo, 
+    .titulo-historico,
+    .timeline-conteudo,
+    .timeline-hora {
+        color: #000000 !important;
+    }
+
+    /* 4. Evita que um cartão de ocorrência seja cortado no meio se houver quebra de página */
+    .cartao-timeline {
+        border: 1px solid #cccccc !important;
+        page-break-inside: avoid !important;
+        margin-bottom: 15px !important;
+    }
+    
+    /* 5. Tira cores de fundo de avisos, caso o histórico esteja vazio */
+    .area-historico-vazia {
+        background-color: transparent !important;
+        border: none !important;
+    }
+}
+
+/* =========================================
+   BOTÃO DE SAIR / VOLTAR PARA O LOGIN
+   ========================================= */
+.btn-deslogar {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    font-size: 0.95rem;
+    color: #e74c3c; /* Vermelho suave para indicar ação de saída */
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-deslogar:hover {
+    color: #c0392b;
+}
+
+/* =========================================
+   LAYOUT ADMIN (ESTILO SUAP) E MENU LATERAL
+   ========================================= */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Adicione esta linha se não tiver */
+}
+
+.layout-admin {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f4f6f9; /* Fundo cinza claro institucional */
+}
+
+/* O Menu da Esquerda */
+.menu-lateral {
+    width: 260px;
+    background-color: #2c3e50; /* Azul escuro/Chumbo clássico de sistemas */
+    color: white;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+    flex-shrink: 0;
+}
+
+.menu-cabecalho {
+    padding: 25px 20px;
+    text-align: center;
+    border-bottom: 1px solid #34495e;
+}
+
+.menu-cabecalho i {
+    font-size: 40px;
+    color: #3498db;
+    margin-bottom: 10px;
+}
+
+.menu-cabecalho h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.menu-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    flex-grow: 1;
+}
+
+.menu-links li a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 25px;
+    color: #ecf0f1;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: background 0.3s;
+    border-left: 4px solid transparent;
+}
+
+.menu-links li a:hover, .menu-links li a.ativo {
+    background-color: #34495e;
+    border-left-color: #3498db; /* Tracinho azul indicando onde o usuário está */
+}
+
+.menu-rodape {
+    padding: 0;
+    border-top: 1px solid #34495e;
+}
+
+/* A Área onde as telas vão aparecer (Direita) */
+.conteudo-principal {
+    flex-grow: 1;
+    padding: 30px;
+    overflow-y: auto;
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel da Turma</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- INÍCIO DO NOVO LAYOUT SUAP -->
+    <div class="layout-admin">
+        
+        <!-- MENU LATERAL -->
+        <aside class="menu-lateral">
+            <div class="menu-cabecalho">
+                <i class="fa-solid fa-school"></i>
+                <h2>Sistema IFB</h2>
+                <p style="font-size: 12px; color: #95a5a6; margin-top: 5px;">Manejo Inclusivo</p>
+            </div>
+            
+            <ul class="menu-links">
+                <!-- Marcamos este link como "ativo" porque é a tela atual -->
+                <li><a href="turma.html" class="ativo"><i class="fa-solid fa-users-viewfinder"></i> Alunos e Turmas</a></li>
+                <li><a href="cadastrar-turma.html"><i class="fa-solid fa-folder-plus"></i> Cadastrar Turma</a></li>
+                <li><a href="relatorios.html"><i class="fa-solid fa-chart-pie"></i> Relatórios Dinâmicos</a></li>
+            </ul>
+
+            <div class="menu-rodape">
+                <!-- Seu botão de sair antigo, agora integrado ao menu! -->
+                <a href="#" id="btn-sair" style="color: #e74c3c; text-decoration: none; display: flex; align-items: center; gap: 10px;">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Sair do Sistema
+                </a>
+            </div>
+        </aside>
+
+        <!-- ÁREA DA DIREITA (SEU CONTEÚDO ANTIGO FICA AQUI DENTRO) -->
+        <main class="conteudo-principal">
+            
+            <div class="painel-container" style="max-width: 100%; box-shadow: none; background: transparent;">
+                
+                <div class="cabecalho-painel">
+                    <h1 class="titulo-painel">Painel Geral de Alunos</h1>
+                    
+                    <div class="botoes-acao">
+                        <a href="cadastro-aluno.html" class="btn-secundario">
+                            <i class="fa-solid fa-user-plus"></i>
+                            Novo Aluno
+                        </a>
+                    </div>
+                </div>
+
+                <div class="grid-alunos">
+                    <!-- Os cards dos alunos vão aparecer aqui via JavaScript -->
+                </div>
+            </div>
+
+        </main>
+    </div>
+    <!-- FIM DO LAYOUT SUAP -->
+
+    <script type="module" src="turma.js"></script>
+</body>
+</html>
