@@ -15,8 +15,24 @@ chipsComportamento.forEach(chip => {
 const chipsIntensidade = document.querySelectorAll('#chips-intensidade .chip');
 chipsIntensidade.forEach(chip => {
     chip.addEventListener('click', () => {
-        chipsIntensidade.forEach(c => c.classList.remove('selecionado'));
+        // 1. Remove a seleção e todas as classes de cores de TODOS os chips
+        chipsIntensidade.forEach(c => {
+            c.classList.remove('selecionado', 'chip-leve', 'chip-moderada', 'chip-alta');
+        });
+        
+        // 2. Adiciona a seleção ao chip clicado
         chip.classList.add('selecionado');
+        
+        // 3. Aplica a classe de cor específica baseada no atributo 'data-valor'
+        const valor = chip.getAttribute('data-valor');
+        
+        if (valor === 'Leve' || valor === 'leve') {
+            chip.classList.add('chip-leve');
+        } else if (valor === 'Moderada' || valor === 'moderada') {
+            chip.classList.add('chip-moderada');
+        } else if (valor === 'Alta' || valor === 'alta') {
+            chip.classList.add('chip-alta');
+        }
     });
 });
 

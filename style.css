@@ -13,7 +13,14 @@
 
 body { 
     background-color: #f5faff; 
-    /* Centraliza todo o conteúdo da página horizontal e verticalmente */
+    /* Remove a centralização para que o layout comece do canto da tela */
+    display: block; 
+    margin: 0;
+    padding: 0;
+}
+
+/* Adicione isto logo abaixo da regra do body que você alterou */
+.body-login {
     display: flex;
     justify-content: center;
     align-items: center; 
@@ -78,8 +85,9 @@ body {
 }
 
 .cartao-perfil.ativo {
-    border-color: #8cbbe1;
-    background-color: #f8fbff; 
+    border: 2px solid #3498db; /* Borda mais grossa e viva */
+    background-color: #e8f4fd; /* Fundo levemente mais escuro que o anterior */
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.15); /* Sombra suave para destacar */
 }
 
 .cartao-perfil span {
@@ -176,8 +184,8 @@ body {
 }
 
 .btn-entrar:disabled {
-    background-color: #d8e0e8; 
-    /* Mostra o cursor de bloqueado para indicar que a ação ainda não é permitida */
+    background-color: #cbd5e1; /* Cinza mais contrastante */
+    color: #64748b; /* Texto um pouco mais escuro para garantir a leitura */
     cursor: not-allowed; 
 }
 
@@ -390,6 +398,26 @@ body {
     margin-top: 10px;
 }
 
+/* --- LAYOUT DO FORMULÁRIO EM GRID --- */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Duas colunas de tamanho igual */
+    gap: 15px; /* Espaço entre os campos */
+    width: 100%;
+}
+
+/* Faz com que campos maiores (como o Nome ou E-mail) ocupem as duas colunas inteiras */
+.col-total {
+    grid-column: 1 / -1; 
+}
+
+/* Responsividade: em celulares, volta a ficar tudo em uma coluna */
+@media (max-width: 600px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 /* =========================================
    PERFIL DO ALUNO
    ========================================= */
@@ -445,6 +473,28 @@ body {
     border-color: #6B9BD1;
     color: #1a3c5a;
     font-weight: 600;
+}
+
+/* --- CHIPS COM CORES SEMÂNTICAS (Intensidade) --- */
+/* Nível Leve (Amarelo) */
+.chip.selecionado.chip-leve {
+    background-color: #fef9c3;
+    border-color: #facc15;
+    color: #854d0e;
+}
+
+/* Nível Moderado (Laranja) */
+.chip.selecionado.chip-moderada {
+    background-color: #ffedd5;
+    border-color: #fb923c;
+    color: #9a3412;
+}
+
+/* Nível Alto (Vermelho) */
+.chip.selecionado.chip-alta {
+    background-color: #fee2e2;
+    border-color: #f87171;
+    color: #991b1b;
 }
 
 .input-area {
@@ -547,8 +597,25 @@ body {
 }
 
 /* Categorias visuais do sistema */
-.timeline-alerta { border-left-color: #f59e0b; } 
-.timeline-positivo { border-left-color: #10b981; } 
+/* --- CORES DA TIMELINE BASEADAS NA INTENSIDADE --- */
+.timeline-leve { 
+    border-left-color: #facc15; /* Amarelo */
+} 
+.timeline-moderada { 
+    border-left-color: #fb923c; /* Laranja */
+} 
+.timeline-alta { 
+    border-left-color: #ef4444; /* Vermelho */
+} 
+.timeline-positivo { 
+    border-left-color: #10b981; /* Verde (para comportamentos desejados/reforço) */
+} 
+
+/* Cores dos Ícones da Timeline */
+.icone-leve { color: #facc15; }
+.icone-moderada { color: #fb923c; }
+.icone-alta { color: #ef4444; }
+.icone-positivo { color: #10b981; }
 
 .timeline-icone {
     font-size: 20px;
@@ -736,23 +803,31 @@ body {
 }
 
 /* =========================================
-   BOTÃO DE SAIR / VOLTAR PARA O LOGIN
+   BOTÃO DE SAIR / RODAPÉ DO MENU
    ========================================= */
+.menu-rodape {
+    margin-top: auto; /* Empurra esta div para o limite inferior do menu lateral */
+    border-top: 1px solid #34495e; /* Linha separadora discreta */
+    padding: 0;
+}
+
 .btn-deslogar {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: 8px;
-    margin-bottom: 20px;
-    font-size: 0.95rem;
-    color: #e74c3c; /* Vermelho suave para indicar ação de saída */
+    gap: 12px;
+    padding: 16px 25px; /* Exatamente o mesmo alinhamento dos links de cima */
+    color: #fca5a5; /* Vermelho claro legível sobre o azul escuro */
     text-decoration: none;
+    font-size: 0.95rem;
     font-weight: 600;
-    transition: color 0.3s ease;
-    cursor: pointer;
+    transition: all 0.3s ease;
+    border-left: 4px solid transparent; 
 }
 
 .btn-deslogar:hover {
-    color: #c0392b;
+    background-color: rgba(239, 68, 68, 0.1); /* Fundo avermelhado ao passar o rato */
+    border-left-color: #ef4444; /* Barra de destaque lateral vermelha */
+    color: #f87171;
 }
 
 /* =========================================
@@ -773,7 +848,7 @@ body {
 /* O Menu da Esquerda */
 .menu-lateral {
     width: 260px;
-    background-color: #2c3e50; /* Azul escuro/Chumbo clássico de sistemas */
+    background-color: #1a3c5a; /* Azul escuro/Chumbo clássico de sistemas */
     color: white;
     display: flex;
     flex-direction: column;
@@ -799,6 +874,13 @@ body {
     font-weight: 600;
 }
 
+.menu-cabecalho p {
+    margin: 5px 0 0 0;
+    font-size: 0.75rem;
+    color: #94a3b8; /* Cinza claro, excelente contraste com o fundo azul escuro */
+    font-weight: 400;
+}
+
 .menu-links {
     list-style: none;
     padding: 0;
@@ -819,8 +901,8 @@ body {
 }
 
 .menu-links li a:hover, .menu-links li a.ativo {
-    background-color: #34495e;
-    border-left-color: #3498db; /* Tracinho azul indicando onde o usuário está */
+    background-color: #2c527a;
+    border-left-color: #6B9BD1; /* Tracinho azul indicando onde o usuário está */
 }
 
 .menu-rodape {
@@ -833,4 +915,16 @@ body {
     flex-grow: 1;
     padding: 30px;
     overflow-y: auto;
+}
+
+/* Adiciona um estilo específico para o link de sair dentro do menu lateral escuro */
+.menu-rodape li a {
+    color: #fca5a5; /* Um tom de vermelho claro que contrasta bem no fundo azul escuro */
+    font-weight: 600;
+}
+
+.menu-rodape li a:hover {
+    background-color: rgba(239, 68, 68, 0.1); /* Um fundo vermelho bem suave ao passar o mouse */
+    border-left-color: #ef4444;
+    color: #f87171;
 }

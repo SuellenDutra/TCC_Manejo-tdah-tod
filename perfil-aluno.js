@@ -40,8 +40,32 @@ async function carregarHistoricoFirebase() {
             containerTimeline.innerHTML = ''; // Limpa o aviso de "Carregando"
             
             historicoAluno.forEach(evento => {
+                
+                // --- INÍCIO DA MUDANÇA (PASSO 4) ---
+                // 1. Variáveis dinâmicas para as cores e ícones
+                let classeBorda = 'timeline-positivo'; // Padrão
+                let classeIcone = 'icone-positivo'; // Padrão
+                let iconeFa = 'fa-circle-exclamation'; 
+
+                // 2. Verifica a intensidade no banco de dados e aplica a cor correspondente
+                if (evento.intensidade === 'Leve' || evento.intensidade === 'leve') {
+                    classeBorda = 'timeline-leve';
+                    classeIcone = 'icone-leve';
+                } else if (evento.intensidade === 'Moderada' || evento.intensidade === 'moderada') {
+                    classeBorda = 'timeline-moderada';
+                    classeIcone = 'icone-moderada';
+                } else if (evento.intensidade === 'Alta' || evento.intensidade === 'alta') {
+                    classeBorda = 'timeline-alta';
+                    classeIcone = 'icone-alta';
+                } else {
+                    // Se não tiver intensidade ou for positivo
+                    iconeFa = 'fa-star'; 
+                }
+
                 const cartao = document.createElement('div');
-                cartao.className = 'cartao-timeline timeline-alerta';
+                // 3. Aplica a classe da borda dinamicamente no cartão
+                cartao.className = `cartao-timeline ${classeBorda}`;
+                // --- FIM DA MUDANÇA (PASSO 4) ---
                 
                 const comportamentosTexto = evento.comportamentos ? evento.comportamentos.join(', ') : 'Não informado';
                 
@@ -52,14 +76,14 @@ async function carregarHistoricoFirebase() {
                     horaFormatada = dataReal.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
                 }
 
+                // 4. Aplica as classes do ícone dinamicamente no HTML interno
                 cartao.innerHTML = `
-                    <div class="timeline-icone icone-alerta">
-                        <i class="fa-solid fa-circle-exclamation"></i>
+                    <div class="timeline-icone ${classeIcone}">
+                        <i class="fa-solid ${iconeFa}"></i>
                     </div>
                     <div class="timeline-conteudo">
                         <div class="timeline-titulo">Comportamento: ${comportamentosTexto}</div>
-                        <div class="timeline-desc">Intensidade: ${evento.intensidade || '-'}</div>
-                        ${evento.observacoes ? `<div class="timeline-obs">" ${evento.observacoes} "</div>` : ''}
+                        <div class="timeline-desc">Intensidade: ${evento.intensidade || '-'}</div>${evento.observacoes ? `<div class="timeline-obs">" ${evento.observacoes} "</div>` : ''}
                     </div>
                     <div class="timeline-hora">
                         ${horaFormatada}

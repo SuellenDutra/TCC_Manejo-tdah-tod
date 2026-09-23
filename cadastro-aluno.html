@@ -19,9 +19,13 @@
             <p class="subtitulo">Preencha os dados para vincular o estudante e o responsável.</p>
         </div>
 
-       <form class="formulario" id="form-cadastro">
+        <form class="formulario" id="form-cadastro">
 
-                <div class="grupo-input">
+            <!-- INÍCIO DO GRID DE 2 COLUNAS -->
+            <div class="form-grid">
+                
+                <!-- Nome: Adicionada a classe 'col-total' para ocupar as duas colunas -->
+                <div class="grupo-input col-total">
                     <label class="rotulo">Nome completo do aluno</label>
                     <div class="input-com-icone">
                         <i class="fa-regular fa-user icone-input"></i>
@@ -29,6 +33,7 @@
                     </div>
                 </div>
 
+                <!-- Matrícula: Ocupa apenas 1 coluna -->
                 <div class="grupo-input">
                     <label class="rotulo">Matrícula</label>
                     <div class="input-com-icone">
@@ -37,6 +42,7 @@
                     </div>
                 </div>
 
+                <!-- Diagnóstico: Ocupa apenas 1 coluna -->
                 <div class="grupo-input">
                     <label class="rotulo">Diagnóstico Principal</label>
                     <div class="input-com-icone">
@@ -52,11 +58,11 @@
                     </div>
                 </div>
 
+                <!-- Turma: Ocupa apenas 1 coluna -->
                 <div class="grupo-input">
                     <label class="rotulo">Turma</label>
                     <div class="input-com-icone">
                         <i class="fa-solid fa-users-viewfinder icone-input"></i>
-                        <!-- Adicionado id="turma-aluno" -->
                         <select id="turma-aluno" required>
                             <option value="" disabled selected>Selecione a turma...</option>
                             <option value="1º Ano">1º Ano</option>
@@ -66,27 +72,27 @@
                     </div>
                 </div>
 
-                <div class="grupo-input">
+                <!-- E-mail: Adicionada a classe 'col-total' para ocupar as duas colunas -->
+                <div class="grupo-input col-total">
                     <label class="rotulo">E-mail do Familiar Responsável</label>
                     <div class="input-com-icone">
                         <i class="fa-regular fa-envelope icone-input"></i>
-                        <!-- Adicionado id="email-familiar" -->
                         <input type="email" id="email-familiar" placeholder="E-mail do pai, mãe ou tutor" required>
                     </div>
                 </div>
 
-                <!-- Adicionado id="btn-salvar" -->
-                <button type="submit" id="btn-salvar" class="btn-nova-ocorrencia btn-largo">
-                    <i class="fa-solid fa-check"></i>
-                    Salvar Cadastro
-                </button>
+            </div> 
+            <!-- FIM DO GRID DE 2 COLUNAS -->
 
-            </form>
-        </div>
+            <!-- Botão de salvar fica de fora do grid para manter sua largura máxima -->
+            <button type="submit" id="btn-salvar" class="btn-nova-ocorrencia btn-largo">
+                <i class="fa-solid fa-check"></i>
+                Salvar Cadastro
+            </button>
+
+        </form>
     </div>
 
     <script type="module" src="cadastro-aluno.js"></script>
-</body>
-</html>
 </body>
 </html>
