@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Turma</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="layout-admin">
+        
+        <!-- MENU LATERAL -->
+        <aside class="menu-lateral">
+            <div class="menu-cabecalho">
+                <i class="fa-solid fa-school"></i>
+                <h2>Sistema IFB</h2>
+                <p>Manejo Inclusivo</p>
+            </div>
+            
+            <ul class="menu-links">
+                <li><a href="turma.html"><i class="fa-solid fa-users-viewfinder"></i> Alunos e Turmas</a></li>
+                <!-- Marcamos este link como ATIVO porque estamos nesta tela -->
+                <li><a href="cadastrar-turma.html" class="ativo"><i class="fa-solid fa-folder-plus"></i> Cadastrar Turma</a></li>
+                <li><a href="relatorios.html"><i class="fa-solid fa-chart-pie"></i> Relatórios Dinâmicos</a></li>
+            </ul>
+
+            <div class="menu-rodape">
+                <a href="#" id="btn-sair" class="btn-deslogar">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Sair do Sistema
+                </a>
+            </div>
+        </aside>
+
+        <!-- CONTEÚDO PRINCIPAL (DIREITA) -->
+        <main class="conteudo-principal">
+            
+            <div class="cabecalho-cadastro">
+                <h1 class="titulo-painel">Cadastrar Nova Turma</h1>
+                <p class="subtitulo">Crie as turmas para organizar seus alunos e ocorrências.</p>
+            </div>
+
+            <div class="caixa-formulario">
+                <form id="form-turma">
+                    <div class="grupo-input">
+                        <label class="rotulo">Nome da Turma</label>
+                        <div class="input-com-icone">
+                            <i class="fa-solid fa-chalkboard-user icone-input"></i>
+                            <input type="text" id="nome-turma" placeholder="Ex: 1º Ano B - Matutino" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="btn-salvar-turma" class="btn-nova-ocorrencia btn-largo">
+                        <i class="fa-solid fa-check"></i> Salvar Turma
+                    </button>
+                </form>
+
+               <!-- Área onde listaremos as turmas que o professor já criou -->
+                <h2 class="titulo-lista-turmas">Turmas Cadastradas:</h2>
+                <ul id="lista-turmas" class="lista-turmas-ui">
+                    <li class="item-turma-vazio">Carregando turmas da nuvem...</li>
+                </ul>
+            </div>
+
+        </main>
+    </div>
+
+    <script type="module" src="cadastrar-turma.js"></script>
+</body>
+</html>

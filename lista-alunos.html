@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudantes da Turma</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="layout-admin">
+        
+        <!-- MENU LATERAL -->
+        <aside class="menu-lateral">
+            <div class="menu-cabecalho">
+                <i class="fa-solid fa-school"></i>
+                <h2>Sistema IFB</h2>
+                <p>Manejo Inclusivo</p>
+            </div>
+            
+            <ul class="menu-links">
+                <!-- Mantemos este ativo, pois ainda estamos no módulo de turmas -->
+                <li><a href="turma.html" class="ativo"><i class="fa-solid fa-users-viewfinder"></i> Alunos e Turmas</a></li>
+                <li><a href="cadastrar-turma.html"><i class="fa-solid fa-folder-plus"></i> Cadastrar Turma</a></li>
+                <li><a href="relatorios.html"><i class="fa-solid fa-chart-pie"></i> Relatórios Dinâmicos</a></li>
+            </ul>
+
+            <div class="menu-rodape">
+                <a href="#" id="btn-sair" class="btn-deslogar">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Sair do Sistema
+                </a>
+            </div>
+        </aside>
+
+        <!-- ÁREA DA DIREITA -->
+        <main class="conteudo-principal">
+            
+            <div class="painel-container" style="max-width: 100%; box-shadow: none; background: transparent; padding: 0;">
+                
+                <a href="turma.html" class="link-voltar" style="margin-bottom: 20px;">
+                    <i class="fa-solid fa-arrow-left"></i> Voltar para Turmas
+                </a>
+
+                <div class="cabecalho-painel" style="flex-direction: row; justify-content: space-between; align-items: center; width: 100%;">
+                    <div>
+                        <h1 class="titulo-painel" id="titulo-turma">Carregando Turma...</h1>
+                        <p class="subtitulo">Selecione um aluno para ver o perfil ou registrar ocorrências.</p>
+                    </div>
+                    
+                    <div class="botoes-acao">
+                        <a href="cadastro-aluno.html" class="btn-secundario">
+                            <i class="fa-solid fa-user-plus"></i>
+                            Novo Aluno
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Onde os cartões dos alunos vão aparecer -->
+                <div class="grid-alunos" id="grid-estudantes">
+                    <p style="color: #666;"><i class="fa-solid fa-spinner fa-spin"></i> Buscando estudantes...</p>
+                </div>
+            </div>
+
+        </main>
+    </div>
+
+    <script type="module" src="lista-alunos.js"></script>
+</body>
+</html>

@@ -3,25 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel da Turma</title>
-    
+    <title>Minhas Turmas</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- INÍCIO DO NOVO LAYOUT SUAP -->
     <div class="layout-admin">
-            
-        <!-- 1. MENU LATERAL -->
+        
+        <!-- MENU LATERAL -->
         <aside class="menu-lateral">
             <div class="menu-cabecalho">
                 <i class="fa-solid fa-school"></i>
-                <h2>Projeto TCC</h2>
-                <p>Desenvolvimento de um sistema web para apoio ao manejo comportamental de crianças com TDAH e TOD</p>
+                <h2>Sistema IFB</h2>
+                <p>Manejo Inclusivo</p>
             </div>
             
             <ul class="menu-links">
+                <!-- Marcado como ativo -->
                 <li><a href="turma.html" class="ativo"><i class="fa-solid fa-users-viewfinder"></i> Alunos e Turmas</a></li>
                 <li><a href="cadastrar-turma.html"><i class="fa-solid fa-folder-plus"></i> Cadastrar Turma</a></li>
                 <li><a href="relatorios.html"><i class="fa-solid fa-chart-pie"></i> Relatórios Dinâmicos</a></li>
@@ -32,32 +31,23 @@
                     <i class="fa-solid fa-arrow-right-from-bracket"></i> Sair do Sistema
                 </a>
             </div>
-        </aside> <!-- ⚠️ ESTA TAG É CRUCIAL: ELA FECHA O MENU ANTES DO CONTEÚDO COMEÇAR -->
+        </aside>
 
-        <!-- 2. ÁREA DA DIREITA (O SEU PAINEL) -->
+        <!-- ÁREA DA DIREITA -->
         <main class="conteudo-principal">
             
-            <div class="painel-container" style="max-width: 100%; box-shadow: none; background: transparent;">
-                
-                <div class="cabecalho-painel">
-                    <h1 class="titulo-painel">Painel Geral de Alunos</h1>
-                    
-                    <div class="botoes-acao">
-                        <a href="cadastro-aluno.html" class="btn-secundario">
-                            <i class="fa-solid fa-user-plus"></i>
-                            Novo Aluno
-                        </a>
-                    </div>
-                </div>
+            <div class="cabecalho-painel">
+                <h1 class="titulo-painel">Minhas Turmas</h1>
+                <p class="subtitulo">Selecione uma turma para visualizar os alunos cadastrados nela.</p>
+            </div>
 
-                <div class="grid-alunos">
-                    <!-- Os cards dos alunos vão aparecer aqui via JavaScript -->
-                </div>
+            <!-- Aqui vão aparecer os cartões das turmas (como pastas) -->
+            <div class="grid-alunos" id="grid-turmas">
+                <p style="color: #666;"><i class="fa-solid fa-spinner fa-spin"></i> Buscando turmas...</p>
             </div>
 
         </main>
     </div>
-    <!-- FIM DO LAYOUT SUAP -->
 
     <script type="module" src="turma.js"></script>
 </body>

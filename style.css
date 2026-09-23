@@ -928,3 +928,104 @@ body {
     border-left-color: #ef4444;
     color: #f87171;
 }
+
+/* =========================================
+   LISTA DE TURMAS (CADASTRO)
+   ========================================= */
+.titulo-lista-turmas {
+    font-size: 16px;
+    margin-top: 40px;
+    margin-bottom: 15px;
+    color: #1a3c5a;
+}
+
+.lista-turmas-ui {
+    list-style: none; /* Tira a bolinha padrão da lista */
+    padding: 0;
+}
+
+.item-turma {
+    padding: 12px 15px;
+    border: 1px solid #E8F1F8;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    background: #f9fafb;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #1a3c5a;
+    font-weight: 500;
+}
+
+.item-turma-vazio {
+    color: #999;
+    font-size: 14px;
+    padding: 10px 0;
+}
+
+/* =========================================
+   LISTA DE ALUNOS (DENTRO DA TURMA)
+   ========================================= */
+.painel-transparente {
+    max-width: 100%; 
+    box-shadow: none; 
+    background: transparent; 
+    padding: 0;
+}
+
+.cabecalho-em-linha {
+    flex-direction: row; 
+    justify-content: space-between; 
+    align-items: center; 
+    width: 100%;
+}
+
+.margem-inferior {
+    margin-bottom: 20px;
+}
+
+.texto-carregando {
+    color: #666;
+    grid-column: 1 / -1;
+    text-align: center;
+}
+
+.texto-erro {
+    color: #e74c3c;
+    grid-column: 1 / -1;
+    text-align: center;
+}
+
+.area-vazia {
+    grid-column: 1 / -1; 
+    text-align: center; 
+    color: #666; 
+    background-color: white; 
+    padding: 40px; 
+    border-radius: 12px; 
+    border: 1px dashed #ccc;
+}
+
+.icone-vazio {
+    font-size: 40px; 
+    color: #a4b3c1; 
+    margin-bottom: 15px;
+}
+
+.icone-titulo {
+    color: #6B9BD1; 
+    margin-right: 10px;
+}
+
+.nome-aluno-destaque {
+    display: block; 
+    margin-bottom: 5px; 
+    font-weight: bold;
+}
+
+.neuro-destaque {
+    font-size: 13px; 
+    color: #6B9BD1; 
+    font-weight: 500; 
+    display: block;
+}

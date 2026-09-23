@@ -1,66 +1,66 @@
-// 1. Imports SEMPRE na primeira linha do arquivo
-import { auth, db } from './firebase-config.js';
+import { db, auth } from './firebase-config.js';
+import { collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 import { signOut } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
-import { collection, getDocs } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
-const gridAlunos = document.querySelector('.grid-alunos');
+const gridTurmas = document.getElementById('grid-turmas');
 
-async function carregarAlunos() {
-    gridAlunos.innerHTML = '<p style="text-align:center; grid-column: 1/-1; color: #666;"><i class="fa-solid fa-spinner fa-spin"></i> Carregando turma...</p>';
-
+// Função para buscar as turmas e criar os cartões na tela
+async function carregarTurmas() {
     try {
-        const querySnapshot = await getDocs(collection(db, "alunos"));
-        gridAlunos.innerHTML = ''; // Limpa a mensagem de carregamento
+        const turmasQuery = query(collection(db, "turmas"), orderBy("nome"));
+        const snapshot = await getDocs(turmasQuery);
+        
+        gridTurmas.innerHTML = '';
 
-        if (querySnapshot.empty) {
-             gridAlunos.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #666;">Nenhum aluno cadastrado ainda. Clique em "Novo Aluno" para começar.</p>';
-             return;
+        if (snapshot.empty) {
+            gridTurmas.innerHTML = `
+                <div style="grid-column: 1/-1; text-align: center; padding: 40px;">
+                    <p style="color: #666; font-size: 16px;">Você ainda não tem turmas cadastradas.</p>
+                </div>
+            `;
+            return;
         }
 
-        querySnapshot.forEach((doc) => {
-            const aluno = doc.data(); // Pega os dados do aluno
-            const novoCartao = document.createElement('div');
-            novoCartao.className = 'cartao-aluno';
+        // Para cada turma, cria um cartão clicável
+        snapshot.forEach(doc => {
+            const turma = doc.data();
+            const cartao = document.createElement('div');
+            cartao.className = 'cartao-aluno'; // Reutilizando a classe CSS que você já tem
             
-            const corBolinha = (aluno.neurodivergencia === 'TOD' || aluno.neurodivergencia === 'TDAH e TOD') ? 'status-atencao' : 'status-bom';
-
-            novoCartao.innerHTML = `
-                <div>
-                    <span class="nome-aluno" style="display:block;">${aluno.nome}</span>
-                    <span style="font-size: 12px; color: #a4b3c1;">${aluno.neurodivergencia || 'Não informado'}</span>
+            cartao.innerHTML = `
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <i class="fa-solid fa-folder-open" style="font-size: 32px; color: #6B9BD1;"></i>
+                    <span class="nome-aluno" style="font-size: 18px;">${turma.nome}</span>
                 </div>
-                <div class="bolinha-status ${corBolinha}"></div>
+                <i class="fa-solid fa-chevron-right" style="color: #ccc;"></i>
             `;
             
-            novoCartao.addEventListener('click', () => {
-                localStorage.setItem('aluno_selecionado', JSON.stringify(aluno));
-                window.location.href = 'perfil-aluno.html';
+            // Quando o professor clicar na pasta da turma:
+            cartao.addEventListener('click', () => {
+                // 1. Salva o nome da turma na memória do navegador
+                localStorage.setItem('turma_selecionada', turma.nome);
+                // 2. Redireciona para a tela que mostra os alunos DESTA turma (que nós já criamos!)
+                window.location.href = 'lista-alunos.html'; 
             });
             
-            gridAlunos.appendChild(novoCartao);
+            gridTurmas.appendChild(cartao);
         });
 
     } catch (error) {
-        console.error("Erro ao buscar alunos:", error);
-        gridAlunos.innerHTML = '<p style="text-align:center; color:#e74c3c; grid-column: 1/-1;">Erro de conexão. Não foi possível carregar a lista.</p>';
+        console.error("Erro ao carregar turmas:", error);
+        gridTurmas.innerHTML = '<p style="color: red;">Erro ao carregar as turmas.</p>';
     }
 }
 
-carregarAlunos();
+// Inicia a função assim que a tela abre
+carregarTurmas();
 
-
+// Lógica de Sair do Sistema
 const btnSair = document.getElementById('btn-sair');
-
 if (btnSair) {
     btnSair.addEventListener('click', async (e) => {
-        e.preventDefault(); 
-        
-        try {
-            await signOut(auth);
-            window.location.href = 'index.html'; 
-        } catch (error) {
-            console.error("Erro ao deslogar:", error);
-            alert("Não foi possível sair da conta. Tente novamente.");
-        }
+        e.preventDefault();
+        await signOut(auth);
+        window.location.href = 'index.html';
     });
 }
