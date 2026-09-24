@@ -1,56 +1,20 @@
-import { db } from './firebase-config.js';
-// Adicionamos getDocs, query e orderBy para poder buscar as turmas
-import { collection, addDoc, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+import { db, auth } from './firebase-config.js';
+import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+import { signOut } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
 
 const form = document.getElementById('form-cadastro');
 const inputNome = document.getElementById('nome-aluno');
 const inputMatricula = document.getElementById('matricula-aluno');
 const inputNeuro = document.getElementById('neuro-aluno');
-const inputTurma = document.getElementById('turma-aluno');
 const inputEmailFamiliar = document.getElementById('email-familiar');
 const btnSalvar = document.getElementById('btn-salvar');
 
-// 1. FUNÇÃO NOVA: BUSCAR TURMAS DA NUVEM PARA A CAIXINHA DE SELEÇÃO
-async function carregarTurmasNoSelect() {
-    try {
-        inputTurma.innerHTML = '<option value="">Carregando turmas da nuvem...</option>';
-        
-        const turmasQuery = query(collection(db, "turmas"), orderBy("nome"));
-        const snapshot = await getDocs(turmasQuery);
+const turmaAtual = localStorage.getItem('turma_selecionada');
 
-        inputTurma.innerHTML = ''; // Limpa o "Carregando..."
-
-        if (snapshot.empty) {
-            // Se não tiver turma cadastrada, avisa e bloqueia o botão de matricular
-            inputTurma.innerHTML = '<option value="" disabled selected>Nenhuma turma cadastrada no sistema.</option>';
-            btnSalvar.disabled = true; 
-            btnSalvar.innerHTML = '<i class="fa-solid fa-lock"></i> Cadastre uma turma primeiro';
-            return;
-        }
-
-        // Opção padrão
-        inputTurma.innerHTML = '<option value="" disabled selected>Selecione a turma do aluno</option>';
-
-        // Para cada turma achada na nuvem, cria uma opção no select
-        snapshot.forEach(doc => {
-            const turma = doc.data();
-            const option = document.createElement('option');
-            option.value = turma.nome; 
-            option.textContent = turma.nome; 
-            inputTurma.appendChild(option);
-        });
-
-    } catch (error) {
-        console.error("Erro ao carregar turmas: ", error);
-        inputTurma.innerHTML = '<option value="" disabled selected>Erro de conexão</option>';
-    }
+if (!turmaAtual) {
+    window.location.href = 'turma.html';
 }
 
-// Carrega as turmas assim que a tela de cadastro abre
-carregarTurmasNoSelect();
-
-
-// 2. FUNÇÃO DE SALVAR O ALUNO (MANTIDA INTACTA)
 form.addEventListener('submit', async (evento) => {
     evento.preventDefault(); 
     
@@ -62,13 +26,12 @@ form.addEventListener('submit', async (evento) => {
             nome: inputNome.value,
             matricula: inputMatricula.value,
             neurodivergencia: inputNeuro.value,
-            turma: inputTurma.value, // Agora salva a turma real escolhida na caixinha!
+            turma: turmaAtual, 
             emailFamiliar: inputEmailFamiliar.value,
             dataCadastro: new Date()
         });
         
-        // Volta para o painel principal
-        window.location.href = 'turma.html';
+        window.location.href = 'lista-alunos.html';
 
     } catch (error) {
         console.error("Erro ao cadastrar aluno: ", error);
@@ -78,3 +41,13 @@ form.addEventListener('submit', async (evento) => {
         btnSalvar.disabled = false;
     }
 });
+
+// Lógica para o botão Sair do menu lateral
+const btnSair = document.getElementById('btn-sair');
+if (btnSair) {
+    btnSair.addEventListener('click', async (e) => {
+        e.preventDefault();
+        await signOut(auth);
+        window.location.href = 'index.html';
+    });
+}

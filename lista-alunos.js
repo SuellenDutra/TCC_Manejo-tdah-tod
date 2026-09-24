@@ -1,6 +1,6 @@
 import { auth, db } from './firebase-config.js';
 import { signOut } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
-import { collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+import { collection, getDocs, query, where, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 
 const gridEstudantes = document.getElementById('grid-estudantes');
 const tituloTurma = document.getElementById('titulo-turma');
@@ -65,5 +65,42 @@ if (btnSair) {
         e.preventDefault(); 
         await signOut(auth);
         window.location.href = 'index.html'; 
+    });
+}
+
+// ==========================================
+// LÓGICA DE EXCLUIR A TURMA
+// ==========================================
+const btnExcluirTurma = document.getElementById('btn-excluir-turma');
+
+if (btnExcluirTurma) {
+    btnExcluirTurma.addEventListener('click', async () => {
+        const confirmacao = confirm(`ATENÇÃO: Tem certeza que deseja excluir a turma "${turmaSelecionada}"?\n\nIsso apagará a pasta desta turma do seu painel.`);
+        
+        if (confirmacao) {
+            btnExcluirTurma.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Excluindo...';
+            btnExcluirTurma.disabled = true;
+
+            try {
+                const q = query(collection(db, "turmas"), where("nome", "==", turmaSelecionada));
+                const snapshot = await getDocs(q);
+
+                // Laço ajustado para respeitar o tempo do Firebase
+                for (const documento of snapshot.docs) {
+                    await deleteDoc(doc(db, "turmas", documento.id));
+                }
+
+                alert("Turma excluída com sucesso!");
+                
+                localStorage.removeItem('turma_selecionada');
+                window.location.href = 'turma.html';
+
+            } catch (error) {
+                console.error("Erro ao excluir turma:", error);
+                alert("Erro ao tentar excluir a turma.");
+                btnExcluirTurma.innerHTML = '<i class="fa-solid fa-trash"></i> Excluir Turma';
+                btnExcluirTurma.disabled = false;
+            }
+        }
     });
 }

@@ -1029,3 +1029,117 @@ body {
     font-weight: 500; 
     display: block;
 }
+
+/* =========================================
+   BOTÕES DE AÇÃO (EXCLUSÃO)
+   ========================================= */
+.grupo-botoes-topo {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-perigo {
+    color: #e74c3c;
+    border-color: #e74c3c;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.btn-perigo:hover {
+    background-color: #fdf0ef;
+}
+
+/* =========================================
+   PAINEL DE FILTROS GLOBAIS (TELA INICIAL)
+   ========================================= */
+.painel-filtros {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 30px;
+    border: 1px solid #e1e8ed;
+}
+
+.titulo-secao-painel {
+    font-size: 18px;
+    color: #2c3e50;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.grid-filtros {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+    align-items: end;
+}
+
+.campo-filtro {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.rotulo-filtro {
+    font-size: 13px;
+    font-weight: 600;
+    color: #555;
+}
+
+.input-filtro {
+    padding: 10px 12px;
+    border: 1px solid #ccd6dd;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #333;
+    background-color: #f9fbfd;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.input-filtro:focus {
+    outline: none;
+    border-color: #6B9BD1;
+    background-color: #fff;
+}
+
+.botoes-filtro {
+    display: flex;
+    gap: 10px;
+}
+
+.secao-resultados-busca {
+    margin-bottom: 35px;
+}
+
+.oculto {
+    display: none;
+}
+
+.etiqueta-turma-card {
+    font-size: 12px;
+    color: #7f8c8d;
+    background-color: #f1f5f9;
+    padding: 3px 8px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-top: 4px;
+}
+
+.cartao-turma-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.icone-pasta-turma {
+    font-size: 32px;
+    color: #6B9BD1;
+}
+
+.icone-seta-direita {
+    color: #ccc;
+}

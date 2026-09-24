@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minhas Turmas</title>
+    <title>Painel Inicial - Manejo Inclusivo</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -11,19 +11,17 @@
 
     <div class="layout-admin">
         
-        <!-- MENU LATERAL -->
+        <!-- MENU LATERAL UNIFICADO -->
         <aside class="menu-lateral">
             <div class="menu-cabecalho">
                 <i class="fa-solid fa-school"></i>
-                <h2>Sistema de TCC</h2>
-                <p>Manejo comportamental de TDAH e TOD</p>
+                <h2>Sistema IFB</h2>
+                <p>Manejo Inclusivo</p>
             </div>
             
             <ul class="menu-links">
-                <!-- Marcado como ativo -->
-                <li><a href="turma.html" class="ativo"><i class="fa-solid fa-users-viewfinder"></i> Turmas e Alunos</a></li>
+                <li><a href="turma.html" class="ativo"><i class="fa-solid fa-magnifying-glass-chart"></i> Painel e Consultas</a></li>
                 <li><a href="cadastrar-turma.html"><i class="fa-solid fa-folder-plus"></i> Cadastrar Turma</a></li>
-                <li><a href="relatorios.html"><i class="fa-solid fa-chart-pie"></i> Relatórios Dinâmicos</a></li>
             </ul>
 
             <div class="menu-rodape">
@@ -33,18 +31,73 @@
             </div>
         </aside>
 
-        <!-- ÁREA DA DIREITA -->
+        <!-- ÁREA PRINCIPAL -->
         <main class="conteudo-principal">
             
             <div class="cabecalho-painel">
-                <h1 class="titulo-painel">Minhas Turmas</h1>
-                <p class="subtitulo">Selecione uma turma para visualizar os alunos cadastrados nela.</p>
+                <h1 class="titulo-painel">Painel Geral e Consultas</h1>
+                <p class="subtitulo">Pesquise estudantes rapidamente com os filtros abaixo ou acesse as pastas das turmas.</p>
             </div>
 
-            <!-- Aqui vão aparecer os cartões das turmas (como pastas) -->
-            <div class="grid-alunos" id="grid-turmas">
-                <p style="color: #666;"><i class="fa-solid fa-spinner fa-spin"></i> Buscando turmas...</p>
-            </div>
+            <!-- BARRA DE FILTROS E BUSCA RÁPIDA NA TELA INICIAL -->
+            <section class="painel-filtros">
+                <h2 class="titulo-secao-painel">
+                    <i class="fa-solid fa-filter icone-titulo"></i> Busca Rápida e Filtros Dinâmicos
+                </h2>
+                
+                <div class="grid-filtros">
+                    <div class="campo-filtro">
+                        <label class="rotulo-filtro" for="filtro-nome">Nome do Aluno</label>
+                        <input type="text" id="filtro-nome" class="input-filtro" placeholder="Digite para buscar...">
+                    </div>
+
+                    <div class="campo-filtro">
+                        <label class="rotulo-filtro" for="filtro-turma">Turma</label>
+                        <select id="filtro-turma" class="input-filtro">
+                            <option value="">Todas as turmas</option>
+                        </select>
+                    </div>
+
+                    <div class="campo-filtro">
+                        <label class="rotulo-filtro" for="filtro-neuro">Neurodivergência</label>
+                        <input type="text" id="filtro-neuro" class="input-filtro" placeholder="Ex: TDAH, TOD, TEA">
+                    </div>
+
+                    <div class="campo-filtro">
+                        <label class="rotulo-filtro" for="filtro-data-inicio">Período (Início)</label>
+                        <input type="date" id="filtro-data-inicio" class="input-filtro">
+                    </div>
+
+                    <div class="campo-filtro">
+                        <label class="rotulo-filtro" for="filtro-data-fim">Período (Fim)</label>
+                        <input type="date" id="filtro-data-fim" class="input-filtro">
+                    </div>
+
+                    <div class="botoes-filtro">
+                        <button id="btn-limpar-filtros" class="btn-secundario">
+                            <i class="fa-solid fa-eraser"></i> Limpar
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RESULTADOS DA BUSCA DE ALUNOS (Aparece quando o professor usa algum filtro) -->
+            <section id="secao-resultados" class="secao-resultados-busca oculto">
+                <h2 class="titulo-secao-painel">
+                    <i class="fa-solid fa-user-check icone-titulo"></i> Estudantes Encontrados
+                </h2>
+                <div class="grid-alunos" id="grid-resultados-alunos"></div>
+            </section>
+
+            <!-- PASTAS DAS TURMAS -->
+            <section>
+                <h2 class="titulo-secao-painel">
+                    <i class="fa-solid fa-folder-tree icone-titulo"></i> Minhas Turmas
+                </h2>
+                <div class="grid-alunos" id="grid-turmas">
+                    <p class="texto-carregando"><i class="fa-solid fa-spinner fa-spin"></i> Buscando turmas...</p>
+                </div>
+            </section>
 
         </main>
     </div>

@@ -21,9 +21,8 @@
             
             <ul class="menu-links">
                 <!-- Mantemos este ativo, pois ainda estamos no módulo de turmas -->
-                <li><a href="turma.html" class="ativo"><i class="fa-solid fa-users-viewfinder"></i> Alunos e Turmas</a></li>
+                <li><a href="turma.html" class="ativo"><i class="fa-solid fa-users-viewfinder"></i> Painel e Consultas</a></li>
                 <li><a href="cadastrar-turma.html"><i class="fa-solid fa-folder-plus"></i> Cadastrar Turma</a></li>
-                <li><a href="relatorios.html"><i class="fa-solid fa-chart-pie"></i> Relatórios Dinâmicos</a></li>
             </ul>
 
             <div class="menu-rodape">
@@ -48,7 +47,12 @@
                         <p class="subtitulo">Selecione um aluno para ver o perfil ou registrar ocorrências.</p>
                     </div>
                     
-                    <div class="botoes-acao">
+                   <div class="botoes-acao grupo-botoes-topo">
+                        <button id="btn-excluir-turma" class="btn-secundario btn-perigo">
+                            <i class="fa-solid fa-trash"></i>
+                            Excluir Turma
+                        </button>
+                        
                         <a href="cadastro-aluno.html" class="btn-secundario">
                             <i class="fa-solid fa-user-plus"></i>
                             Novo Aluno
@@ -58,7 +62,7 @@
 
                 <!-- Onde os cartões dos alunos vão aparecer -->
                 <div class="grid-alunos" id="grid-estudantes">
-                    <p style="color: #666;"><i class="fa-solid fa-spinner fa-spin"></i> Buscando estudantes...</p>
+                    <p><i class="fa-solid fa-spinner fa-spin"></i> Buscando estudantes...</p>
                 </div>
             </div>
 
