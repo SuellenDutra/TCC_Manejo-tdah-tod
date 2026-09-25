@@ -85,9 +85,8 @@ body {
 }
 
 .cartao-perfil.ativo {
-    border: 2px solid #3498db; /* Borda mais grossa e viva */
-    background-color: #e8f4fd; /* Fundo levemente mais escuro que o anterior */
-    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.15); /* Sombra suave para destacar */
+    border: 2px solid #6B9BD1;
+    background-color: #f0f8ff;
 }
 
 .cartao-perfil span {
@@ -1142,4 +1141,250 @@ body {
 
 .icone-seta-direita {
     color: #ccc;
+}
+
+/* =========================================
+   CAIXA DE TRANSFERÊNCIA DE TURMA
+   ========================================= */
+.caixa-transferencia {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+/* =========================================
+   IMPRESSÃO (GERAR RELATÓRIO PDF)
+   ========================================= */
+@media print {
+    /* Oculta o menu lateral e todos os botões na hora de imprimir */
+    .menu-lateral,
+    .link-voltar,
+    .grupo-botoes-topo,
+    .botoes-acao,
+    .btn-nova-ocorrencia,
+    #btn-gerar-relatorio {
+        display: none !important;
+    }
+
+    /* Expande a área principal para ocupar a folha A4 inteira */
+    .layout-admin {
+        display: block !important;
+    }
+    
+    .conteudo-principal {
+        margin: 0 !important;
+        padding: 0 !important;
+        width: 100% !important;
+    }
+
+    /* Remove as cores de fundo para economizar tinta e ficar limpo */
+    body, .conteudo-principal, .painel-transparente, .layout-admin {
+        background-color: white !important;
+        box-shadow: none !important;
+    }
+
+    /* Evita que um cartão de ocorrência seja cortado no meio entre duas páginas */
+    .cartao-timeline {
+        page-break-inside: avoid;
+        border: 1px solid #ccc !important;
+    }
+}
+
+/* =========================================
+   TELAS DE AUTENTICAÇÃO (CENTRALIZADAS)
+   ========================================= */
+.tela-centralizada {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f8fafc;
+}
+
+.caixa-centralizada {
+    background-color: #ffffff;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    width: 100%;
+    max-width: 450px;
+    margin: auto;
+}
+
+/* =========================================
+   TEMA FAMÍLIA (CORES E IDENTIDADE)
+   ========================================= */
+.tema-familia .menu-lateral {
+    background-color: #2E8B57; /* Verde acolhedor */
+}
+
+.tema-familia .menu-links li a.ativo {
+    color: #2E8B57;
+    background-color: #e8f5e9;
+    border-left-color: #2E8B57;
+}
+
+.tema-familia .avatar-destaque {
+    background-color: #2E8B57;
+    color: white;
+    padding: 15px 18px;
+    border-radius: 50%;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* =========================================
+   RESPONSIVIDADE (MOBILE E TABLETS)
+   ========================================= */
+@media (max-width: 768px) {
+    .layout-admin {
+        flex-direction: column;
+    }
+
+    /* Transforma o menu lateral em uma barra superior compacta */
+    .menu-lateral {
+        width: 100%;
+        height: auto;
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 20px;
+        box-sizing: border-box;
+    }
+
+    .menu-cabecalho {
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .menu-cabecalho i {
+        font-size: 24px;
+        margin-bottom: 0;
+    }
+
+    .menu-cabecalho h2 {
+        font-size: 18px;
+    }
+
+    .menu-cabecalho p, .menu-links {
+        display: none; /* Oculta subtítulo e links para poupar espaço no celular */
+    }
+
+    .menu-rodape {
+        position: relative;
+        width: auto;
+        padding: 0;
+    }
+
+    .btn-deslogar {
+        padding: 8px 12px;
+        font-size: 13px;
+        justify-content: center;
+    }
+
+    /* Expande o conteúdo principal para ocupar 100% da tela */
+    .conteudo-principal {
+        margin-left: 0;
+        padding: 15px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+    /* Ajusta cabeçalhos, botões e filtros para empilhamento vertical */
+    .cabecalho-em-linha {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .grupo-botoes-topo, .botoes-acao {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .grupo-botoes-topo button, .botoes-acao a, .botoes-acao button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .grid-filtros, .grid-alunos {
+        grid-template-columns: 1fr;
+    }
+
+    /* Otimiza a leitura da timeline de ocorrências */
+    .cartao-timeline {
+        flex-direction: column;
+        align-items: flex-start;
+        position: relative;
+        gap: 10px;
+    }
+
+    .timeline-hora {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        font-size: 12px;
+    }
+}
+
+/* =========================================
+   AJUSTES DE COR - CABEÇALHO FAMÍLIA
+   ========================================= */
+.tema-familia .menu-lateral {
+    color: white; /* Força o texto base para branco */
+}
+
+.tema-familia .menu-cabecalho i,
+.tema-familia .menu-cabecalho h2 {
+    color: white !important; /* Logo do Sistema IFB em branco */
+}
+
+.tema-familia .btn-deslogar {
+    color: white !important; /* Texto de sair em branco */
+    background-color: rgba(255, 255, 255, 0.15); /* Fundo sutil */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+}
+
+.tema-familia .btn-deslogar i {
+    color: white !important;
+}
+
+.tema-familia .btn-deslogar:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+}
+
+.tag-aluno {
+    display: inline-block;
+    background-color: #e2e8f0;
+    color: #475569;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+/* Seletor de Múltiplos Filhos */
+.seletor-estudante {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #2E8B57;
+    border-radius: 8px;
+    background-color: #f8fafc;
+    color: #2E8B57;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    outline: none;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }

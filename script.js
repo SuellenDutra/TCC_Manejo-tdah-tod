@@ -38,8 +38,12 @@ btnEntrar.addEventListener('click', async (evento) => {
     btnEntrar.textContent = "Carregando...";
     btnEntrar.disabled = true;
 
-    try {
+   try {
         await signInWithEmailAndPassword(auth, email, senha);
+        
+        // NOVIDADE: Salva o perfil na memória do navegador para a trava de segurança
+        localStorage.setItem('perfilLogado', perfilSelecionado);
+
         if (perfilSelecionado === 'Educador') {
             window.location.href = 'turma.html'; 
         } 

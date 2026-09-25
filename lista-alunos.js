@@ -1,6 +1,18 @@
 import { auth, db } from './firebase-config.js';
 import { signOut } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
 import { collection, getDocs, query, where, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+
+// ==========================================
+// TRAVA DE SEGURANÇA (ROTA DO EDUCADOR)
+// ==========================================
+onAuthStateChanged(auth, (user) => {
+    const perfil = localStorage.getItem('perfilLogado');
+    // Se não houver usuário logado no Firebase OU se o perfil não for de Educador, bloqueia!
+    if (!user || perfil !== 'Educador') {
+        window.location.href = 'index.html';
+    }
+});
 
 const gridEstudantes = document.getElementById('grid-estudantes');
 const tituloTurma = document.getElementById('titulo-turma');
@@ -59,14 +71,15 @@ async function carregarAlunosDaTurma() {
     }
 }
 
-const btnSair = document.getElementById('btn-sair');
-if (btnSair) {
-    btnSair.addEventListener('click', async (e) => {
+btnSair.addEventListener('click', async (e) => {
         e.preventDefault(); 
+        
+        // NOVIDADE: Limpa a memória de segurança ao sair
+        localStorage.removeItem('perfilLogado');
+        
         await signOut(auth);
         window.location.href = 'index.html'; 
     });
-}
 
 // ==========================================
 // LÓGICA DE EXCLUIR A TURMA

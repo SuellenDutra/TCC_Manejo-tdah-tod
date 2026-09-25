@@ -3,42 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel da Família</title>
-
+    <title>Painel da Família - Sistema IFB</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="fundo-painel">
+<body class="tema-familia">
 
-        <a href="#" id="btn-sair" class="btn-deslogar">
-            <i class="fa-solid fa-arrow-right-from-bracket"></i> Sair e Voltar para o Login
-        </a>
-
-    <div class="painel-container">
+    <div class="layout-admin">
         
-        <div class="cabecalho-familia">
-            <div class="avatar-familia">
-                <i class="fa-solid fa-user-graduate icone-avatar"></i>
+        <!-- MENU LATERAL RESTRITO (VISÃO FAMÍLIA) -->
+        <aside class="menu-lateral">
+            <div class="menu-cabecalho">
+                <i class="fa-solid fa-school"></i>
+                <h2>Sistema IFB</h2>
+                <p>Acesso Familiar</p>
             </div>
-            <h1 class="titulo-painel" id="nome-filho">Carregando...</h1>
-            <p class="subtitulo" id="info-filho">Buscando dados seguros...</p>
-        </div>
+            
+            <ul class="menu-links">
+                <li><a href="#" class="ativo"><i class="fa-solid fa-user-graduate"></i> Acompanhamento</a></li>
+            </ul>
 
-        <h2 class="titulo-painel" style="font-size: 18px; margin-bottom: 15px;">
-            <i class="fa-solid fa-clock-rotate-left"></i> Atualizações Diárias
-        </h2>
-        
-        <div id="container-timeline-familia">
-        </div>
+            <div class="menu-rodape">
+                <!-- Mantém o ID btn-sair para o seu JavaScript deslogar do Firebase com segurança -->
+                <a href="#" id="btn-sair" class="btn-deslogar">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i> Sair do Sistema
+                </a>
+            </div>
+        </aside>
 
-        <div style="text-align: center; margin-top: 30px;">
-            <a href="index.html" class="link-voltar link-sair">
-                <i class="fa-solid fa-arrow-right-from-bracket"></i> Sair do Aplicativo
-            </a>
-        </div>
+        <!-- ÁREA PRINCIPAL -->
+        <main class="conteudo-principal">
+            
+            <div class="painel-container painel-transparente">
+                
+                <!-- CABEÇALHO DO ESTUDANTE -->
+                <div class="cabecalho-painel cabecalho-em-linha">
+                    <div style="display: flex; align-items: center; gap: 20px;">
+                        
+                        <!-- O NOVO CÓDIGO ENTRA AQUI -->
+                        <div class="avatar-destaque">
+                            <i class="fa-solid fa-user-graduate"></i>
+                        </div>
+                        <!-- ====================== -->
 
+                        <div>
+                            <h1 class="titulo-painel" id="nome-filho">Carregando...</h1>
+                            <p class="subtitulo" id="info-filho">Buscando dados seguros...</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- HISTÓRICO DE LEITURA -->
+                <h2 class="titulo-historico" style="margin-top: 30px; margin-bottom: 20px;">
+                    <i class="fa-solid fa-clock-rotate-left"></i> Atualizações Diárias
+                </h2>
+                
+                <div id="container-timeline-familia">
+                    <!-- O JavaScript preenche a timeline aqui -->
+                </div>
+
+            </div>
+
+        </main>
     </div>
 
-   <script type="module" src="painel-familia.js"></script>
+    <script type="module" src="painel-familia.js"></script>
 </body>
 </html>

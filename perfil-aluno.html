@@ -3,7 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perfil do Aluno</title>
+    <title>Painel Inicial - Manejo Inclusivo</title>
+    
+    <!-- TRAVA DE SEGURANÇA IMEDIATA (Evita o piscar da tela) -->
+    <script>
+        if (localStorage.getItem('perfilLogado') !== 'Educador') {
+            window.location.replace('index.html');
+        }
+    </script>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -40,29 +48,51 @@
                     <i class="fa-solid fa-arrow-left"></i> Voltar para a Turma
                 </a>
 
-                <div class="cabecalho-painel cabecalho-em-linha">
+               <div class="cabecalho-painel cabecalho-em-linha">
                     
-                    <!-- Lado Esquerdo: Informações do Estudante -->
                     <div>
                         <h1 class="titulo-painel" id="nome-aluno-titulo">Carregando...</h1>
                         <p class="subtitulo info-matricula" id="matricula-aluno-texto">Matrícula: ...</p>
                         <p class="neuro-destaque info-diagnostico" id="neuro-aluno-texto">Diagnóstico: ...</p>
                     </div>
                     
-                    <!-- Lado Direito: Botões Alinhados -->
                     <div class="botoes-acao grupo-botoes-topo">
-
                         <a href="registro-ocorrencia.html" class="btn-nova-ocorrencia">
                             <i class="fa-solid fa-plus"></i> Registrar Ocorrência
                         </a>
-
+                        
                          <button id="btn-gerar-relatorio" class="btn-secundario">
                             <i class="fa-solid fa-file-pdf"></i> Gerar Relatório
+                        </button>
+
+                        <button id="btn-abrir-realocacao" class="btn-secundario">
+                            <i class="fa-solid fa-people-arrows"></i> Mudar de Turma
                         </button>
 
                         <button id="btn-excluir-aluno" class="btn-secundario btn-perigo">
                             <i class="fa-solid fa-user-xmark"></i> Excluir Aluno
                         </button>
+                    </div>
+                </div>
+
+                <!-- CAIXA OCULTA PARA TRANSFERIR O ALUNO DE TURMA -->
+                <div id="caixa-realocacao" class="painel-filtros caixa-transferencia oculto">
+                    <div class="cabecalho-em-linha">
+                        <div class="campo-filtro">
+                            <label class="rotulo-filtro" for="select-nova-turma">Transferir estudante para a turma:</label>
+                            <select id="select-nova-turma" class="input-filtro">
+                                <option value="">Carregando turmas...</option>
+                            </select>
+                        </div>
+                        
+                        <div class="grupo-botoes-topo">
+                            <button id="btn-confirmar-realocacao" class="btn-nova-ocorrencia">
+                                <i class="fa-solid fa-check"></i> Confirmar
+                            </button>
+                            <button id="btn-cancelar-realocacao" class="btn-secundario">
+                                Cancelar
+                            </button>
+                        </div>
                     </div>
                 </div>
 

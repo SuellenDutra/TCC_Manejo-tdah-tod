@@ -7,30 +7,26 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="tela-centralizada">
 
-    <div class="login-container container-largo">
+    <div class="caixa-centralizada">
         <h1 class="titulo">Criar Nova Conta</h1>
         <p class="subtitulo">Preencha os dados abaixo para acessar o sistema.</p>
 
-      <!-- Adicionado id="form-cadastro" e removido o action -->
         <form class="formulario" id="form-cadastro">
             
             <div class="grupo-input">
                 <i class="fa-regular fa-user icone-input"></i>
-                <!-- Adicionado id="nome-cadastro" -->
                 <input type="text" id="nome-cadastro" placeholder="Seu nome completo" required>
             </div>
 
             <div class="grupo-input">
                 <i class="fa-regular fa-envelope icone-input"></i>
-                <!-- Adicionado id="email-cadastro" -->
                 <input type="email" id="email-cadastro" placeholder="Seu melhor e-mail" required>
             </div>
 
             <div class="grupo-input">
                 <i class="fa-solid fa-lock icone-input"></i>
-                <!-- Adicionado id="senha-cadastro" -->
                 <input type="password" id="senha-cadastro" placeholder="Crie uma senha segura (mínimo 6 caracteres)" required>
             </div>
 
@@ -38,7 +34,6 @@
                 <label class="rotulo rotulo-perfil">Eu sou:</label>
                 <div class="input-com-icone">
                     <i class="fa-solid fa-id-card icone-input"></i>
-                    <!-- Adicionado id="perfil-cadastro" -->
                     <select id="perfil-cadastro" required>
                         <option value="" disabled selected>Selecione seu perfil...</option>
                         <option value="Educador">Educador(a) / Professor(a)</option>
@@ -47,7 +42,6 @@
                 </div>
             </div>
 
-            <!-- Adicionado id="btn-cadastrar" -->
             <button type="submit" id="btn-cadastrar" class="btn-entrar btn-espaco">
                 Finalizar Cadastro
             </button>
@@ -58,9 +52,6 @@
         </div>
     </div>
 
-    <!-- Adicionado script em formato de módulo -->
     <script type="module" src="cadastro-usuario.js"></script>
-</body>
-</html>
 </body>
 </html>

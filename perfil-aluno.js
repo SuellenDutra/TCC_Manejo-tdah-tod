@@ -1,6 +1,18 @@
 import { db } from './firebase-config.js';
 // Importação completa corrigida: histórico + exclusão
-import { collection, getDocs, query, where, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+import { collection, getDocs, query, where, deleteDoc, doc, updateDoc} from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+
+// ==========================================
+// TRAVA DE SEGURANÇA (ROTA DO EDUCADOR)
+// ==========================================
+onAuthStateChanged(auth, (user) => {
+    const perfil = localStorage.getItem('perfilLogado');
+    // Se não houver usuário logado no Firebase OU se o perfil não for de Educador, bloqueia!
+    if (!user || perfil !== 'Educador') {
+        window.location.href = 'index.html';
+    }
+});
 
 const alunoString = localStorage.getItem('aluno_selecionado');
 const aluno = alunoString ? JSON.parse(alunoString) : { nome: 'Erro', matricula: '-', neurodivergencia: '-' };
@@ -138,11 +150,83 @@ if (btnExcluirAluno) {
 // ==========================================
 // LÓGICA DE SAIR DO SISTEMA
 // ==========================================
-const btnSair = document.getElementById('btn-sair');
-if (btnSair) {
-    btnSair.addEventListener('click', async (e) => {
+btnSair.addEventListener('click', async (e) => {
         e.preventDefault(); 
+        
+        // NOVIDADE: Limpa a memória de segurança ao sair
+        localStorage.removeItem('perfilLogado');
+        
         await signOut(auth);
         window.location.href = 'index.html'; 
+    });
+
+// ==========================================
+// LÓGICA DE REALOCAR ALUNO PARA OUTRA TURMA
+// ==========================================
+const btnAbrirRealocacao = document.getElementById('btn-abrir-realocacao');
+const caixaRealocacao = document.getElementById('caixa-realocacao');
+const selectNovaTurma = document.getElementById('select-nova-turma');
+const btnConfirmarRealocacao = document.getElementById('btn-confirmar-realocacao');
+const btnCancelarRealocacao = document.getElementById('btn-cancelar-realocacao');
+
+if (btnAbrirRealocacao) {
+    btnAbrirRealocacao.addEventListener('click', async () => {
+        caixaRealocacao.classList.remove('oculto');
+        selectNovaTurma.innerHTML = '<option value="">Buscando turmas...</option>';
+
+        try {
+            const snapshotTurmas = await getDocs(collection(db, "turmas"));
+            selectNovaTurma.innerHTML = '';
+
+            snapshotTurmas.forEach(documento => {
+                const dadosTurma = documento.data();
+                const option = document.createElement('option');
+                option.value = dadosTurma.nome;
+                option.textContent = dadosTurma.nome;
+
+                if (dadosTurma.nome === aluno.turma) {
+                    option.selected = true;
+                }
+                selectNovaTurma.appendChild(option);
+            });
+        } catch (erro) {
+            console.error("Erro ao carregar turmas:", erro);
+            selectNovaTurma.innerHTML = '<option value="">Erro ao carregar</option>';
+        }
+    });
+}
+
+if (btnCancelarRealocacao) {
+    btnCancelarRealocacao.addEventListener('click', () => {
+        caixaRealocacao.classList.add('oculto');
+    });
+}
+
+if (btnConfirmarRealocacao) {
+    btnConfirmarRealocacao.addEventListener('click', async () => {
+        const novaTurma = selectNovaTurma.value;
+        if (!novaTurma) return;
+
+        btnConfirmarRealocacao.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Salvando...';
+        btnConfirmarRealocacao.disabled = true;
+
+        try {
+            await updateDoc(doc(db, "alunos", aluno.id), {
+                turma: novaTurma
+            });
+
+            aluno.turma = novaTurma;
+            localStorage.setItem('aluno_selecionado', JSON.stringify(aluno));
+            localStorage.setItem('turma_selecionada', novaTurma);
+
+            alert(`Estudante transferido para a turma "${novaTurma}" com sucesso!`);
+            window.location.href = 'lista-alunos.html';
+
+        } catch (erro) {
+            console.error("Erro ao transferir aluno:", erro);
+            alert("Erro ao tentar transferir o estudante.");
+            btnConfirmarRealocacao.innerHTML = '<i class="fa-solid fa-check"></i> Confirmar';
+            btnConfirmarRealocacao.disabled = false;
+        }
     });
 }

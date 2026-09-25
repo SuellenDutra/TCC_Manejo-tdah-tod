@@ -1,5 +1,17 @@
 import { db } from './firebase-config.js';
 import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+
+// ==========================================
+// TRAVA DE SEGURANÇA (ROTA DO EDUCADOR)
+// ==========================================
+onAuthStateChanged(auth, (user) => {
+    const perfil = localStorage.getItem('perfilLogado');
+    // Se não houver usuário logado no Firebase OU se o perfil não for de Educador, bloqueia!
+    if (!user || perfil !== 'Educador') {
+        window.location.href = 'index.html';
+    }
+});
 
 const alunoString = localStorage.getItem('aluno_selecionado');
 const aluno = alunoString ? JSON.parse(alunoString) : { nome: 'Aluno Desconhecido', matricula: 'sem_matricula', emailFamiliar: '' };

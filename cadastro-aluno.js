@@ -1,6 +1,18 @@
 import { db, auth } from './firebase-config.js';
 import { collection, addDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 import { signOut } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+
+// ==========================================
+// TRAVA DE SEGURANÇA (ROTA DO EDUCADOR)
+// ==========================================
+onAuthStateChanged(auth, (user) => {
+    const perfil = localStorage.getItem('perfilLogado');
+    // Se não houver usuário logado no Firebase OU se o perfil não for de Educador, bloqueia!
+    if (!user || perfil !== 'Educador') {
+        window.location.href = 'index.html';
+    }
+});
 
 const form = document.getElementById('form-cadastro');
 const inputNome = document.getElementById('nome-aluno');
@@ -43,11 +55,12 @@ form.addEventListener('submit', async (evento) => {
 });
 
 // Lógica para o botão Sair do menu lateral
-const btnSair = document.getElementById('btn-sair');
-if (btnSair) {
-    btnSair.addEventListener('click', async (e) => {
-        e.preventDefault();
+btnSair.addEventListener('click', async (e) => {
+        e.preventDefault(); 
+        
+        // NOVIDADE: Limpa a memória de segurança ao sair
+        localStorage.removeItem('perfilLogado');
+        
         await signOut(auth);
-        window.location.href = 'index.html';
+        window.location.href = 'index.html'; 
     });
-}
