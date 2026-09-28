@@ -1,14 +1,12 @@
-import { db } from './firebase-config.js';
-// Importação completa corrigida: histórico + exclusão
-import { collection, getDocs, query, where, deleteDoc, doc, updateDoc} from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+import { db, auth } from './firebase-config.js';
+import { collection, getDocs, query, where, deleteDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
 
 // ==========================================
 // TRAVA DE SEGURANÇA (ROTA DO EDUCADOR)
 // ==========================================
 onAuthStateChanged(auth, (user) => {
     const perfil = localStorage.getItem('perfilLogado');
-    // Se não houver usuário logado no Firebase OU se o perfil não for de Educador, bloqueia!
     if (!user || perfil !== 'Educador') {
         window.location.href = 'index.html';
     }
@@ -18,8 +16,8 @@ const alunoString = localStorage.getItem('aluno_selecionado');
 const aluno = alunoString ? JSON.parse(alunoString) : { nome: 'Erro', matricula: '-', neurodivergencia: '-' };
 
 document.getElementById('nome-aluno-titulo').textContent = aluno.nome;
-document.getElementById('matricula-aluno-texto').textContent = `Matrícula: ${aluno.matricula}`;
-document.getElementById('neuro-aluno-texto').textContent = `Diagnóstico: ${aluno.neurodivergencia}`;
+document.getElementById('matricula-aluno-texto').textContent = `Matrícula: ${aluno.matricula || '-'}`;
+document.getElementById('neuro-aluno-texto').textContent = `Diagnóstico: ${aluno.neurodivergencia || '-'}`;
 
 const containerTimeline = document.getElementById('container-timeline');
 
@@ -32,8 +30,8 @@ async function carregarHistoricoFirebase() {
         
         let historicoAluno = [];
         
-        querySnapshot.forEach((doc) => {
-            historicoAluno.push(doc.data());
+        querySnapshot.forEach((documento) => {
+            historicoAluno.push(documento.data());
         });
 
         historicoAluno.sort((a, b) => {
@@ -76,9 +74,11 @@ async function carregarHistoricoFirebase() {
                 const comportamentosTexto = evento.comportamentos ? evento.comportamentos.join(', ') : 'Não informado';
                 
                 let horaFormatada = "--:--";
+                let dataFormatada = "--/--/----";
                 if (evento.dataRegistroNuvem) {
                     const dataReal = evento.dataRegistroNuvem.toDate();
                     horaFormatada = dataReal.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+                    dataFormatada = dataReal.toLocaleDateString('pt-BR');
                 }
 
                 cartao.innerHTML = `
@@ -87,7 +87,11 @@ async function carregarHistoricoFirebase() {
                     </div>
                     <div class="timeline-conteudo">
                         <div class="timeline-titulo">Comportamento: ${comportamentosTexto}</div>
-                        <div class="timeline-desc">Intensidade: ${evento.intensidade || '-'}</div>${evento.observacoes ? `<div class="timeline-obs">" ${evento.observacoes} "</div>` : ''}
+                        <div class="timeline-desc">Intensidade: ${evento.intensidade || '-'}</div>
+                        ${evento.observacoes ? `<div class="timeline-obs">" ${evento.observacoes} "</div>` : ''}
+                        <div class="timeline-data">
+                            <i class="fa-regular fa-calendar"></i> ${dataFormatada}
+                        </div>
                     </div>
                     <div class="timeline-hora">
                         ${horaFormatada}
@@ -150,15 +154,15 @@ if (btnExcluirAluno) {
 // ==========================================
 // LÓGICA DE SAIR DO SISTEMA
 // ==========================================
-btnSair.addEventListener('click', async (e) => {
+const btnSair = document.getElementById('btn-sair');
+if (btnSair) {
+    btnSair.addEventListener('click', async (e) => {
         e.preventDefault(); 
-        
-        // NOVIDADE: Limpa a memória de segurança ao sair
         localStorage.removeItem('perfilLogado');
-        
         await signOut(auth);
         window.location.href = 'index.html'; 
     });
+}
 
 // ==========================================
 // LÓGICA DE REALOCAR ALUNO PARA OUTRA TURMA

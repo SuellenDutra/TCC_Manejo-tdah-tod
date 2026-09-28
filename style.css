@@ -1388,3 +1388,10 @@ body {
     cursor: pointer;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
+
+/* Data nos cartões da linha do tempo */
+.timeline-data {
+    font-size: 11px;
+    color: #888;
+    margin-top: 6px;
+}

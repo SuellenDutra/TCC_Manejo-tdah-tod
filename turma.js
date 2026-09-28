@@ -192,13 +192,12 @@ btnLimpar.addEventListener('click', () => {
 inicializarPainel();
 
 // Lógica de Sair do Sistema
-btnSair = document.getElementById('btn-sair');
-btnSair.addEventListener('click', async (e) => {
+const btnSair = document.getElementById('btn-sair');
+if (btnSair) {
+    btnSair.addEventListener('click', async (e) => {
         e.preventDefault(); 
-        
-        // NOVIDADE: Limpa a memória de segurança ao sair
         localStorage.removeItem('perfilLogado');
-        
         await signOut(auth);
         window.location.href = 'index.html'; 
     });
+}
