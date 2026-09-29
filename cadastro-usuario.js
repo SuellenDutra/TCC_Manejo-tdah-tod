@@ -13,13 +13,14 @@ const btnCadastrar = document.getElementById('btn-cadastrar');
 formCadastro.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const nome = inputNome.value;
-    const email = inputEmail.value;
+    // O .trim() previne que a validação falhe se o usuário digitar um espaço sem querer
+    const nome = inputNome.value.trim();
+    const email = inputEmail.value.trim();
     const senha = inputSenha.value;
     const perfil = selectPerfil.value;
 
     if (perfil === 'Educador' && !email.toLowerCase().endsWith('@ifb.edu.br')) {
-        alert("Acesso restrito! O cadastro de educadores é exclusivo para e-mails institucionais (@ifb.edu.br)."); /*validação de domínio de e-mail para educadores*/
+        alert("Acesso restrito!"); 
         return; 
     }
 

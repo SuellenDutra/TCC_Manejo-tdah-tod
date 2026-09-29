@@ -1,5 +1,5 @@
 import { auth } from './firebase-config.js';
-import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+import { signInWithEmailAndPassword, signOut } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
 
 let perfilSelecionado = 'Educador'; // Padrão
 const cartoes = document.querySelectorAll('.cartao-perfil');
@@ -32,8 +32,20 @@ inputSenha.addEventListener('input', verificarCampos);
 btnEntrar.addEventListener('click', async (evento) => {
     evento.preventDefault(); 
     
-    const email = inputEmail.value;
+    // O .trim() remove espaços em branco acidentais no começo ou fim
+    const email = inputEmail.value.trim();
     const senha = inputSenha.value;
+
+    // ==========================================
+    // BLOQUEIO DE SEGURANÇA (DOMÍNIO IFB)
+    // ==========================================
+    if (perfilSelecionado === 'Educador' && !email.toLowerCase().endsWith('@ifb.edu.br')) {
+        alert("Acesso restrito! O painel de educadores é exclusivo para e-mails institucionais (@ifb.edu.br).");
+        await signOut(auth); // Derruba qualquer sessão que tenha ficado presa
+        inputSenha.value = '';
+        verificarCampos();
+        return; // Interrompe a função aqui! Nem consulta a nuvem.
+    }
 
     btnEntrar.textContent = "Carregando...";
     btnEntrar.disabled = true;
@@ -41,7 +53,7 @@ btnEntrar.addEventListener('click', async (evento) => {
    try {
         await signInWithEmailAndPassword(auth, email, senha);
         
-        // NOVIDADE: Salva o perfil na memória do navegador para a trava de segurança
+        // Salva o perfil na memória do navegador para a trava de segurança das rotas
         localStorage.setItem('perfilLogado', perfilSelecionado);
 
         if (perfilSelecionado === 'Educador') {
