@@ -1,8 +1,19 @@
+import { auth } from './firebase-config.js';
+import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+
+// ==========================================
+// TRAVA DE SEGURANÇA (ROTA DO EDUCADOR)
+// ==========================================
+onAuthStateChanged(auth, (user) => {
+    const perfil = localStorage.getItem('perfilLogado');
+    // Se não houver usuário logado no Firebase OU se o perfil não for de Educador, bloqueia!
+    if (!user || perfil !== 'Educador') {
+        window.location.href = 'index.html';
+    }
+});
+
 const ocorrenciaString = localStorage.getItem('ocorrencia_atual');
 const ocorrenciaAtual = ocorrenciaString ? JSON.parse(ocorrenciaString) : null;
-
-const alunoString = localStorage.getItem('aluno_selecionado');
-const aluno = alunoString ? JSON.parse(alunoString) : null;
 
 const baseEstrategias = {
     'Agitação': `
@@ -70,22 +81,13 @@ if (ocorrenciaAtual && ocorrenciaAtual.comportamentos && ocorrenciaAtual.comport
         }
     });
 } else {
-    gridSugestoes.innerHTML = '<p style="text-align:center; width:100%;">Nenhuma estratégia específica encontrada. Continue com o manejo padrão da turma.</p>';
+    gridSugestoes.innerHTML = '<p class="area-vazia">Nenhuma estratégia específica encontrada. Continue com o manejo padrão da turma.</p>';
 }
 
 const btnEntendi = document.getElementById('btn-entendi');
-btnEntendi.addEventListener('click', () => {
-    if (aluno && ocorrenciaAtual) {
-        const chaveHistorico = `historico_${aluno.matricula}`;
-        
-        let historicoAluno = JSON.parse(localStorage.getItem(chaveHistorico)) || [];
-        
-        historicoAluno.unshift(ocorrenciaAtual);
-        
-        localStorage.setItem(chaveHistorico, JSON.stringify(historicoAluno));
-        
+if (btnEntendi) {
+    btnEntendi.addEventListener('click', () => {
         localStorage.removeItem('ocorrencia_atual');
-    }
-
-    window.location.href = 'perfil-aluno.html';
-});
+        window.location.href = 'perfil-aluno.html';
+    });
+}

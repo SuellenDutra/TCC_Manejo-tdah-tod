@@ -1,7 +1,6 @@
-import { auth, db } from './firebase-config.js';
-import { signOut } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+import { db, auth } from './firebase-config.js';
+import { signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
 import { collection, getDocs, query, where, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
 
 // ==========================================
 // TRAVA DE SEGURANÇA (ROTA DO EDUCADOR)
@@ -34,17 +33,17 @@ async function carregarAlunosDaTurma() {
         gridEstudantes.innerHTML = '';
 
         if (querySnapshot.empty) {
-             gridEstudantes.innerHTML = `
+            gridEstudantes.innerHTML = `
                 <div class="area-vazia">
                     <i class="fa-regular fa-face-frown-open icone-vazio"></i>
                     <p>Nenhum aluno matriculado nesta turma ainda.</p>
                 </div>`;
-             return;
+            return;
         }
 
-        querySnapshot.forEach((doc) => {
-            const aluno = doc.data();
-            aluno.id = doc.id; 
+        querySnapshot.forEach((documento) => {
+            const aluno = documento.data();
+            aluno.id = documento.id; 
 
             const cartao = document.createElement('div');
             cartao.className = 'cartao-aluno'; 
@@ -71,15 +70,18 @@ async function carregarAlunosDaTurma() {
     }
 }
 
-btnSair.addEventListener('click', async (e) => {
+// ==========================================
+// LÓGICA DE SAIR DO SISTEMA
+// ==========================================
+const btnSair = document.getElementById('btn-sair');
+if (btnSair) {
+    btnSair.addEventListener('click', async (e) => {
         e.preventDefault(); 
-        
-        // NOVIDADE: Limpa a memória de segurança ao sair
         localStorage.removeItem('perfilLogado');
-        
         await signOut(auth);
         window.location.href = 'index.html'; 
     });
+}
 
 // ==========================================
 // LÓGICA DE EXCLUIR A TURMA

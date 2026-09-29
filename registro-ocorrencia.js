@@ -1,4 +1,4 @@
-import { db } from './firebase-config.js';
+import { db, auth } from './firebase-config.js';
 import { collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
 
@@ -73,8 +73,8 @@ form.addEventListener('submit', async (evento) => {
 
         await addDoc(collection(db, "ocorrencias"), {
             alunoNome: aluno.nome,
-            matricula: aluno.matricula, // PONTE PARA O ALUNO
-            emailFamiliar: aluno.emailFamiliar, // PONTE PARA A FAMÍLIA
+            matricula: aluno.matricula || '-', // PONTE PARA O ALUNO
+            emailFamiliar: aluno.emailFamiliar || '', // PONTE PARA A FAMÍLIA
             comportamentos: comportamentosSelecionados,
             intensidade: intensidade,
             observacoes: observacoes,
