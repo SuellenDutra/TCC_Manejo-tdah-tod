@@ -32,28 +32,50 @@ inputSenha.addEventListener('input', verificarCampos);
 btnEntrar.addEventListener('click', async (evento) => {
     evento.preventDefault(); 
     
-    // O .trim() remove espaços em branco acidentais no começo ou fim
-    const email = inputEmail.value.trim();
+    const email = inputEmail.value.trim().toLowerCase();
     const senha = inputSenha.value;
 
     // ==========================================
-    // BLOQUEIO DE SEGURANÇA (DOMÍNIO IFB)
+    // 1. A MÁGICA: VERIFICAÇÃO DO ADMIN MÁSTER
     // ==========================================
-    if (perfilSelecionado === 'Educador' && !email.toLowerCase().endsWith('@ifb.edu.br')) {
-        alert("Acesso restrito! O painel de educadores é exclusivo para e-mails institucionais (@ifb.edu.br).");
-        await signOut(auth); // Derruba qualquer sessão que tenha ficado presa
-        inputSenha.value = '';
-        verificarCampos();
-        return; // Interrompe a função aqui! Nem consulta a nuvem.
+    const EMAIL_ADMIN = 'admin@ifb.edu.br'; //senha: 40028922
+    if (email === EMAIL_ADMIN) {
+        btnEntrar.textContent = "Autenticando Gestão...";
+        btnEntrar.disabled = true;
+        
+        try {
+            await signInWithEmailAndPassword(auth, email, senha);
+            localStorage.setItem('perfilLogado', 'Administrador'); // Trava de segurança exclusiva
+            window.location.href = 'painel-admin.html'; // Rota secreta
+            return; 
+        } catch (error) {
+            alert("Acesso negado para a gestão! Senha incorreta.");
+            inputSenha.value = '';
+            verificarCampos();
+            btnEntrar.textContent = "Entrar";
+            return;
+        }
     }
 
+    // ==========================================
+    // 2. BLOQUEIO DE SEGURANÇA (PROFESSORES)
+    // ==========================================
+    if (perfilSelecionado === 'Educador' && !email.endsWith('@ifb.edu.br')) {
+        alert("Acesso restrito! O painel de educadores é exclusivo para e-mails institucionais (@ifb.edu.br).");
+        await signOut(auth); 
+        inputSenha.value = '';
+        verificarCampos();
+        return; 
+    }
+
+    // ==========================================
+    // 3. FLUXO NORMAL (EDUCADOR OU FAMILIAR)
+    // ==========================================
     btnEntrar.textContent = "Carregando...";
     btnEntrar.disabled = true;
 
    try {
         await signInWithEmailAndPassword(auth, email, senha);
-        
-        // Salva o perfil na memória do navegador para a trava de segurança das rotas
         localStorage.setItem('perfilLogado', perfilSelecionado);
 
         if (perfilSelecionado === 'Educador') {
