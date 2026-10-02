@@ -1,16 +1,18 @@
 import { db, auth } from './firebase-config.js';
-import { collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
-import { signOut } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
-import { onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
+import { collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+import { signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
 
 // ==========================================
-// TRAVA DE SEGURANÇA (ROTA DO EDUCADOR)
+// TRAVA DE SEGURANÇA E INICIALIZAÇÃO
 // ==========================================
 onAuthStateChanged(auth, (user) => {
     const perfil = localStorage.getItem('perfilLogado');
     // Se não houver usuário logado no Firebase OU se o perfil não for de Educador, bloqueia!
     if (!user || perfil !== 'Educador') {
         window.location.href = 'index.html';
+    } else {
+        // Só carrega o painel APÓS o Firebase confirmar quem é o professor logado
+        inicializarPainel(user.uid);
     }
 });
 
@@ -28,26 +30,30 @@ const btnLimpar = document.getElementById('btn-limpar-filtros');
 let listaTodosAlunos = [];
 let listaTodasOcorrencias = [];
 
-// 1. Carrega Turmas, Alunos e Ocorrências para alimentar a tela inicial
-async function inicializarPainel() {
+// 1. Carrega APENAS Turmas, Alunos e Ocorrências DESTE professor logado
+async function inicializarPainel(professorUid) {
     try {
-        // Busca Turmas
-        const turmasQuery = query(collection(db, "turmas"), orderBy("nome"));
+        // --- BUSCA AS TURMAS ISOLADAS ---
+        const turmasQuery = query(collection(db, "turmas"), where("professorUid", "==", professorUid));
         const snapshotTurmas = await getDocs(turmasQuery);
         
+        let turmasDoProfessor = [];
+        snapshotTurmas.forEach(doc => turmasDoProfessor.push(doc.data()));
+        
+        // Ordena em ordem alfabética no JavaScript (evita exigência de índices extras no Firebase)
+        turmasDoProfessor.sort((a, b) => a.nome.localeCompare(b.nome));
+
         gridTurmas.innerHTML = '';
         selectTurma.innerHTML = '<option value="">Todas as turmas</option>';
 
-        if (snapshotTurmas.empty) {
+        if (turmasDoProfessor.length === 0) {
             gridTurmas.innerHTML = `
                 <div class="area-vazia">
-                    <p>Você ainda não tem turmas cadastradas.</p>
+                    <p>Você ainda não tem turmas cadastradas no seu perfil.</p>
                 </div>
             `;
         } else {
-            snapshotTurmas.forEach(doc => {
-                const turma = doc.data();
-                
+            turmasDoProfessor.forEach(turma => {
                 // Preenche o filtro de turmas no topo
                 const option = document.createElement('option');
                 option.value = turma.nome;
@@ -74,20 +80,31 @@ async function inicializarPainel() {
             });
         }
 
-        // Busca todos os alunos para pesquisa rápida
+        // --- BUSCA OS ALUNOS E FILTRA PELAS TURMAS DESTE PROFESSOR ---
+        const nomesDasTurmas = turmasDoProfessor.map(t => t.nome);
         const snapshotAlunos = await getDocs(collection(db, "alunos"));
         listaTodosAlunos = [];
+        
         snapshotAlunos.forEach(doc => {
             const dados = doc.data();
-            dados.id = doc.id;
-            listaTodosAlunos.push(dados);
+            // Só guarda na lista se a turma do aluno for uma das turmas do professor logado
+            if (nomesDasTurmas.includes(dados.turma)) {
+                dados.id = doc.id;
+                listaTodosAlunos.push(dados);
+            }
         });
 
-        // Busca ocorrências para permitir filtro por período de tempo
+        // --- BUSCA AS OCORRÊNCIAS E FILTRA PELOS ALUNOS DESTE PROFESSOR ---
+        const nomesDosAlunos = listaTodosAlunos.map(a => a.nome);
         const snapshotOcorrencias = await getDocs(collection(db, "ocorrencias"));
         listaTodasOcorrencias = [];
+        
         snapshotOcorrencias.forEach(doc => {
-            listaTodasOcorrencias.push(doc.data());
+            const oc = doc.data();
+            // Só guarda a ocorrência se o nome do aluno estiver na lista dos alunos deste professor
+            if (nomesDosAlunos.includes(oc.alunoNome)) {
+                listaTodasOcorrencias.push(oc);
+            }
         });
 
     } catch (error) {
@@ -188,8 +205,6 @@ btnLimpar.addEventListener('click', () => {
     inputDataFim.value = '';
     secaoResultados.classList.add('oculto');
 });
-
-inicializarPainel();
 
 // Lógica de Sair do Sistema
 const btnSair = document.getElementById('btn-sair');

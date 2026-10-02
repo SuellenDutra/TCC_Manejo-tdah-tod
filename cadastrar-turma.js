@@ -1,15 +1,18 @@
 import { db, auth } from './firebase-config.js';
-import { collection, addDoc, getDocs, orderBy, query } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
+import { collection, addDoc, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore.js";
 import { signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
 
 // ==========================================
-// TRAVA DE SEGURANÇA (ROTA DO EDUCADOR)
+// TRAVA DE SEGURANÇA E CARREGAMENTO
 // ==========================================
 onAuthStateChanged(auth, (user) => {
     const perfil = localStorage.getItem('perfilLogado');
-    // Se não houver usuário logado no Firebase OU se o perfil não for de Educador, bloqueia!
+    
     if (!user || perfil !== 'Educador') {
         window.location.href = 'index.html';
+    } else {
+        // Só carrega as turmas DEPOIS que o Firebase confirmar quem é o professor logado!
+        carregarTurmas(user.uid);
     }
 });
 
@@ -18,21 +21,28 @@ const inputTurma = document.getElementById('nome-turma');
 const btnSalvar = document.getElementById('btn-salvar-turma');
 const listaTurmas = document.getElementById('lista-turmas');
 
-// 1. Função para BUSCAR as turmas lá no Firestore e mostrar na tela
-async function carregarTurmas() {
+// 1. Função para BUSCAR apenas as turmas DESTE professor na listagem lateral
+async function carregarTurmas(professorUid) {
     try {
-        const turmasQuery = query(collection(db, "turmas"), orderBy("nome"));
+        // A MÁGICA DO ISOLAMENTO: Pede ao banco apenas as turmas com o UID do professor
+        const turmasQuery = query(collection(db, "turmas"), where("professorUid", "==", professorUid));
         const snapshot = await getDocs(turmasQuery);
         
         listaTurmas.innerHTML = ''; 
 
         if (snapshot.empty) {
-            listaTurmas.innerHTML = '<li class="item-turma-vazio">Nenhuma turma cadastrada ainda.</li>';
+            listaTurmas.innerHTML = '<li class="item-turma-vazio">Nenhuma turma cadastrada no seu perfil.</li>';
             return;
         }
 
+        // Pega as turmas e organiza em ordem alfabética no JavaScript
+        let lista = [];
         snapshot.forEach(documento => {
-            const turma = documento.data();
+            lista.push({ id: documento.id, ...documento.data() });
+        });
+        lista.sort((a, b) => a.nome.localeCompare(b.nome));
+
+        lista.forEach(turma => {
             const li = document.createElement('li');
             li.className = 'item-turma';
             li.innerHTML = `<i class="fa-solid fa-folder icone-pasta-turma"></i> ${turma.nome}`;
@@ -45,20 +55,24 @@ async function carregarTurmas() {
     }
 }
 
-// 2. Ação de SALVAR a turma nova quando clica no botão
+// 2. Ação de SALVAR a turma nova com o carimbo do professor
 formTurma.addEventListener('submit', async (e) => {
     e.preventDefault();
     
+    const usuarioLogado = auth.currentUser;
+    if (!usuarioLogado) return;
+
     btnSalvar.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Salvando na nuvem...';
     btnSalvar.disabled = true;
 
     try {
         await addDoc(collection(db, "turmas"), {
-            nome: inputTurma.value.trim()
+            nome: inputTurma.value.trim(),
+            professorUid: usuarioLogado.uid // <-- VÍNCULO DE PROPRIEDADE SALVO AQUI
         });
         
         inputTurma.value = ''; 
-        await carregarTurmas(); 
+        await carregarTurmas(usuarioLogado.uid); 
 
     } catch (error) {
         console.error("Erro ao salvar turma:", error);
@@ -68,8 +82,6 @@ formTurma.addEventListener('submit', async (e) => {
         btnSalvar.disabled = false;
     }
 });
-
-carregarTurmas();
 
 // 3. Lógica do botão de Sair (Logout) no menu
 const btnSair = document.getElementById('btn-sair');

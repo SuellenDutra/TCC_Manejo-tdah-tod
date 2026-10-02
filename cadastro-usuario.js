@@ -15,12 +15,15 @@ formCadastro.addEventListener('submit', async (e) => {
 
     // O .trim() previne que a validação falhe se o usuário digitar um espaço sem querer
     const nome = inputNome.value.trim();
-    const email = inputEmail.value.trim();
+    const email = inputEmail.value.trim().toLowerCase();
     const senha = inputSenha.value;
     const perfil = selectPerfil.value;
 
-    if (perfil === 'Educador' && !email.toLowerCase().endsWith('@ifb.edu.br')) {
-        alert("Acesso restrito!"); 
+    // ==========================================
+    // BLOQUEIO DE SEGURANÇA (DOMÍNIO IFB)
+    // ==========================================
+    if (perfil === 'Educador' && !email.endsWith('@ifb.edu.br')) {
+        alert("Acesso restrito! O cadastro de educadores é exclusivo para e-mails institucionais (@ifb.edu.br)."); 
         return; 
     }
 
@@ -31,6 +34,7 @@ formCadastro.addEventListener('submit', async (e) => {
         const userCredential = await createUserWithEmailAndPassword(auth, email, senha);
         const user = userCredential.user;
 
+        // Salva os dados extras do usuário no Firestore
         await setDoc(doc(db, "usuarios", user.uid), {
             nome: nome,
             email: email,
