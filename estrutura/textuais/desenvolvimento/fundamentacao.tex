@@ -5,15 +5,47 @@
 \chapter{FUNDAMENTAÇÃO TEÓRICA}
 \label{chap:fundamentacao}
 
-Para fundamentar o desenvolvimento da solução tecnológica proposta neste trabalho, torna-se necessário analisar sistemas correlatos já existentes, com o objetivo de compreender como diferentes plataformas abordam aspectos relacionados ao manejo comportamental, à comunicação escolar e à organização de rotinas voltadas ao público neurodivergente. Essa análise permite identificar funcionalidades relevantes, estratégias de interação e, sobretudo, limitações e lacunas ainda presentes nas soluções disponíveis, justificando a proposição de um novo sistema.
+\subsection{Transtorno de Déficit de Atenção com Hiperatividade (TDAH)}
 
-Nesse contexto, são investigados cinco sistemas com diferentes finalidades e abordagens: o DBT Coach, voltado ao acompanhamento clínico e emocional; o ClassDojo, direcionado à gamificação da comunicação entre escola e família; o Pictalk Buddy e o Minha Rotina Especial, focados na organização visual de rotinas e no suporte à previsibilidade das atividades diárias; e a Sequência Mágica, ferramenta educacional voltada ao desenvolvimento da organização lógica e sequencial na educação infantil.
+O Transtorno de Déficit de Atenção com Hiperatividade (TDAH) é um transtorno do neurodesenvolvimento de origem neurobiológica, cujos sintomas manifestam-se frequentemente nos primeiros anos de vida e podem persistir até a fase adulta \cite{barkley2015}. De acordo com o Manual Diagnóstico e Estatístico de Transtornos Mentais (DSM-5) da Associação Americana de Psiquiatria \cite{apa2014}, o TDAH caracteriza-se por um padrão persistente de desatenção e/ou hiperatividade-impulsividade que interfere diretamente no funcionamento e no desenvolvimento do indivíduo.
 
-A análise comparativa considera aspectos como objetivo da plataforma, público-alvo, funcionalidades oferecidas, recursos de acessibilidade, estratégias de interação e usabilidade estrutural. A partir dessa investigação, busca-se compreender de que maneira as soluções existentes podem contribuir para a construção de uma proposta mais integrada, acessível e adequada às necessidades de crianças neurodivergentes, seus responsáveis e profissionais da educação.
+Segundo Mattos \cite{mattos2003}, o transtorno afeta fortemente as funções executivas do cérebro, prejudicando a capacidade de planejamento, a memória de trabalho e a autorregulação. No contexto educacional, alunos com TDAH frequentemente enfrentam desafios para acompanhar o ritmo das atividades propostas. Rohde et al. \cite{rohde2004} enfatizam que essas manifestações não se tratam de incapacidade intelectual ou de falta de vontade, mas de déficits estruturais na regulação atencional e motora.
+
+\subsection{Transtorno Opositivo Desafiador (TOD)}
+
+O Transtorno Opositor Desafiador (TOD) é classificado pelo DSM-5 \cite{apa2014} no grupo dos transtornos disruptivos, do controle de impulsos e da conduta. Ele é descrito como um padrão persistente de humor raivoso e irritável, comportamento questionador, argumentativo e de índole vingativa. Para que o diagnóstico seja estabelecido, tais comportamentos devem ocorrer de forma frequente e persistente, estendendo-se além do que é considerado típico para a idade e o nível de desenvolvimento da criança.
+
+Crianças diagnosticadas com TOD apresentam uma tendência marcante de perder a paciência facilmente, responsabilizar terceiros por seus erros e desafiar ativamente regras ou pedidos feitos por figuras de autoridade, como pais e professores \cite{barkley2015}. É fundamental compreender que o comportamento opositor inerente ao TOD não se resume a uma desobediência comum ou a episódios isolados de frustração, mas reflete uma profunda dificuldade de regulação emocional e uma rigidez cognitiva significativa frente a quebras de expectativa.
+
+\subsection{A Comorbidade entre TDAH e TOD no Contexto Escolar}
+
+Em grande parte dos casos clínicos, o TDAH não se manifesta de maneira isolada. O TOD é uma das comorbidades mais prevalentes em crianças com TDAH. \citeonline{barkley2015} destaca que a coexistência dessas duas condições torna os desafios de manejo clínico e escolar exponencialmente mais complexos. 
+
+Enquanto o TDAH contribui de forma primária com a impulsividade, a agitação motora e a desorganização, o TOD adiciona uma camada de resistência ativa e intencional. No ambiente escolar, essa associação pode resultar em severas desestruturações na dinâmica da sala de aula. O aluno pode não apenas ter dificuldade em iniciar uma tarefa (devido ao TDAH), como também se recusar ativamente a fazê-la e confrontar o professor que a solicitou (devido ao TOD). Consequentemente, esses alunos estão sob alto risco de sofrerem punições frequentes, suspensões e exclusão social, evidenciando a necessidade urgente de abordagens baseadas em evidências em vez de métodos puramente punitivos.
+
+\subsection{O Manejo Comportamental e a Parceria Escola-Família}
+
+Diante das complexidades impostas pelo TDAH e pelo TOD, a literatura médica e pedagógica converge para a necessidade de um tratamento multimodal. Uma das frentes mais importantes dessa abordagem é o manejo comportamental em rede, ou seja, a aplicação de estratégias unificadas e consistentes tanto no ambiente escolar quanto no familiar. Intervenções proativas, como a antecipação e previsibilidade de rotinas, o uso de comandos curtos, a redução de disputas diretas de poder e o reforço positivo imediato, são fundamentais para o desenvolvimento socioemocional desses alunos \cite{mattos2003}.
+
+Para que o manejo comportamental alcance resultados concretos, a consistência é o pilar central. \citeonline{dessen2007} ressaltam que a parceria família-escola atua como um fator de proteção vital para crianças neurodivergentes. Contudo, a ausência de canais de comunicação eficientes rotineiramente provoca o desalinhamento de estratégias --- como a aplicação de uma abordagem rígida na escola contrastando com uma altamente permissiva em casa ---, fato que confunde o aluno e eleva o nível de ansiedade e oposição. Por isso, soluções tecnológicas estruturadas tornam-se ferramentas essenciais para a integração dessa rede de apoio, mitigando ruídos e garantindo que intervenções pedagógicas sejam aplicadas de forma colaborativa e transparente.
+
+\subsection{Contexto Institucional e Normativo: O Projeto TEiA no Instituto Federal de Brasília}
+
+No contexto do Instituto Federal de Brasília (IFB), a efetivação das políticas de educação inclusiva ocorre mediante a atuação estruturada de comissões e projetos institucionais especializados. Destaca-se, nesse cenário, o Projeto TEiA (Formação Continuada em Inclusão e Suporte para Estudantes com TEA e Neuroatípicos), uma iniciativa voltada ao fortalecimento da cultura de inclusão e acessibilidade. A comissão e a equipe do TEiA atuam de forma transversal, envolvendo especialistas em inclusão e operando em parceria direta com a Coordenação de Inclusão (CINC) e as coordenações pedagógicas e de curso do campus \cite{brasil2025ted}.
+
+Os normativos e diretrizes estabelecidos pelo Projeto TEiA definem como prioridade a capacitação dos servidores e o suporte direto às equipes pedagógicas, garantindo o acompanhamento efetivo de estudantes neurodivergentes, o que abrange o manejo comportamental de discentes com TDAH e TOD. Dentre as principais exigências metodológicas e operacionais impostas por essa rede de apoio, sobressai a obrigatoriedade da elaboração, execução e monitoramento dos Planos de Atendimento Educacional Especializado (PAEE) e dos Planos Educacionais Individualizados (PEI). O PEI, em particular, é um instrumento pedagógico central que exige o registro sistemático da rotina diária, documentando as adaptações curriculares e as intervenções táticas aplicadas ao estudante.
+
+A execução dessas diretrizes institucionais, no entanto, esbarra no desafio logístico de unificar os registros e facilitar o compartilhamento dessas informações entre todos os professores e a família. É precisamente nessa lacuna que a proposta de desenvolvimento de um sistema web se justifica, alinhando-se de forma direta aos objetivos do Projeto TEiA.
+
+Ao fornecer uma plataforma centralizada para o registro das ocorrências e para o acompanhamento da rotina diária exigida no PEI, a tecnologia operacionaliza as normativas de inclusão do IFB. Dessa forma, o sistema transcende a função de mero repositório de dados e passa a atuar como um facilitador do fluxo de trabalho da comissão do TEiA, mitigando ruídos de comunicação e garantindo que o monitoramento e a avaliação das práticas inclusivas sejam cumpridos de maneira estruturada, colaborativa e eficiente.
 
 \section{Sistemas Similares}
 
-A fim de mapear o panorama tecnológico atual e identificar as lacunas existentes no mercado educacional e de saúde, esta seção apresenta uma análise de sistemas similares voltados ao suporte comportamental e à regulação emocional. A partir dessa investigação, torna-se possível contrastar as soluções já consolidadas com a proposta inovadora delineada neste trabalho.
+A fim de mapear o panorama tecnológico atual e identificar as lacunas existentes no mercado educacional e de saúde, torna-se necessário analisar sistemas correlatos já existentes. Essa investigação tem como objetivo compreender como diferentes plataformas abordam o suporte comportamental, a comunicação escolar e a organização de rotinas voltadas ao público neurodivergente, justificando, assim, a proposição da nova solução delineada neste trabalho.
+
+Nesse contexto, são investigados cinco sistemas com diferentes finalidades e abordagens: o \textbf{DBT Coach}, voltado ao acompanhamento clínico e emocional; o \textbf{ClassDojo}, direcionado à gamificação da comunicação entre escola e família; o \textbf{Pictalk Buddy} e o \textbf{Minha Rotina Especial}, focados na organização visual de rotinas e no suporte à previsibilidade das atividades diárias; e a \textbf{Sequência Mágica}, ferramenta educacional voltada ao desenvolvimento da organização lógica e sequencial na educação infantil.
+
+A análise comparativa dessas ferramentas considera aspectos estruturais e funcionais, tais como: objetivo da plataforma, público-alvo, funcionalidades oferecidas, recursos de acessibilidade, estratégias de interação e usabilidade. A partir desse contraste, busca-se compreender de que maneira as soluções já consolidadas podem contribuir para a construção de uma proposta tecnológica mais integrada, acessível e adequada às necessidades táticas de crianças neurodivergentes, de seus responsáveis e dos profissionais da educação.
 
 \vspace{0.3cm}
 \subsection{DBT Coach}
@@ -170,7 +202,7 @@ Após a análise individual das ferramentas, o Quadro \ref{quadro:comparativo_si
     \setlength{\tabcolsep}{3pt}
     \small 
 
-    \begin{tabular}{|p{2.4cm}|p{3.8cm}|p{2.5cm}|p{2.4cm}|p{2.0cm}|p{1.8cm}|}
+    \begin{tabular}{|>{\raggedright\arraybackslash}p{2.4cm}|>{\raggedright\arraybackslash}p{3.8cm}|>{\raggedright\arraybackslash}p{2.5cm}|>{\centering\arraybackslash}p{2.4cm}|>{\centering\arraybackslash}p{2.0cm}|>{\raggedright\arraybackslash}p{1.8cm}|}
         \hline
         \textbf{Sistema} & \textbf{Foco Principal} & \textbf{Público-Alvo} & \textbf{Comunicação \newline Escola-Família} & \textbf{Sugestões \newline de Manejo} & \textbf{Plataforma} \\ \hline
         
@@ -182,14 +214,16 @@ Após a análise individual das ferramentas, o Quadro \ref{quadro:comparativo_si
         
         \textbf{Sequência Mágica} & Organização de rotinas diárias e acessibilidade cognitiva. & Crianças e pais & Não & Não & App Mobile \\ \hline
         
-        \textbf{Sistema Proposto} & Registro comportamental contínuo e suporte estratégico pedagógico. & Professores e pais \newline (Foco em TDAH/TOD) & Sim & Sim & Web Resp. \\ \hline
+        \textbf{Sistema Proposto} & Registro comportamental contínuo e suporte estratégico pedagógico. & Educadores (TEiA) e pais \newline (Estudantes com TDAH/TOD) & Sim & Sim & Web Resp. \\ \hline
     \end{tabular}
     
     \vspace{0.2cm}
-    \legend{Fonte: Elaborado pelo autor (2026)}
+    \legend{Fonte: Elaborado pela autora (2026)}
 \end{table}
 
 \vspace{0.3cm}
 \section{Considerações do Capítulo}
 
-Este capítulo apresentou os principais sistemas e conceitos que fundamentam a pesquisa, abordando ferramentas voltadas ao manejo do Transtorno de Déficit de Atenção com Hiperatividade (TDAH) e do Transtorno Opositor Desafiador (TOD), bem como plataformas de comunicação escolar e tecnologias de regulação emocional. A análise comparativa desses recursos forneceu a base necessária para a compreensão das necessidades da rede de apoio (escola e família) e evidenciou a lacuna tecnológica existente no mercado, justificando e sustentando o desenvolvimento da proposta apresentada nos capítulos seguintes.
+Este capítulo estabeleceu os alicerces teóricos e institucionais que fundamentam a pesquisa. Inicialmente, foram delineadas as características clínicas do Transtorno de Déficit de Atenção com Hiperatividade (TDAH) e do Transtorno Opositor Desafiador (TOD), evidenciando a complexidade do manejo comportamental e a necessidade vital de uma parceria integrada e consistente entre a escola e a família. Em seguida, a pesquisa contextualizou essa demanda na realidade normativa do Instituto Federal de Brasília (IFB), pautada pelas diretrizes inclusivas do Projeto TEiA e pela exigência de registros sistemáticos.
+
+Por fim, a análise comparativa de sistemas similares — abrangendo plataformas de comunicação escolar, acessibilidade cognitiva e regulação emocional — comprovou a existência de uma lacuna tecnológica estrutural. A ausência de ferramentas que unam, em um único ambiente, o registro ágil de ocorrências à oferta de estratégias proativas e direcionadas de suporte justifica e sustenta plenamente o desenvolvimento da solução web proposta nos capítulos seguintes.
