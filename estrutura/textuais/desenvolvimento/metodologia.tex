@@ -5,12 +5,12 @@
 \chapter{METODOLOGIA}
 \label{chap:metodologia}
 
-Este capítulo descreve os procedimentos metodológicos e técnicos adotados para a concepção, o desenvolvimento e a validação do sistema proposto. O objetivo é detalhar o percurso percorrido desde a identificação do problema até a estruturação e a implementação integral da solução tecnológica voltada para o apoio ao manejo comportamental e à comunicação escolar de estudantes com TDAH e TOD. Para isso, são apresentadas a classificação da pesquisa, o modelo de engenharia de \textit{software} adotado, as técnicas de levantamento de requisitos e as tecnologias aplicadas na construção completa da plataforma, englobando tanto a interface visual quanto a infraestrutura de dados.
+Este capítulo descreve os procedimentos metodológicos e técnicos adotados para a concepção, o desenvolvimento e a validação do sistema proposto. O objetivo é detalhar o percurso percorrido desde a identificação do problema até a estruturação da solução tecnológica voltada para o manejo comportamental e a comunicação escolar de alunos com TDAH e TOD. Para isso, são apresentados a classificação da pesquisa, o modelo de engenharia de software escolhido, as técnicas de levantamento de requisitos e as tecnologias utilizadas na construção da plataforma.
 
 \vspace{0.5cm}
 \section{Descrição Geral da Pesquisa}
 
-A pesquisa delineada neste projeto classifica-se, quanto à sua natureza, como aplicada, visto que culminou no desenvolvimento de um produto tecnológico real — o sistema TEia — voltado à resolução de problemas práticos de comunicação entre família e escola no cenário da neurodivergência. Segundo \citeonline{prodanov2013}, a pesquisa aplicada caracteriza-se pelo interesse na aplicação e nas consequências práticas do conhecimento.
+A pesquisa delineada neste projeto classifica-se, quanto à sua natureza, como aplicada, visto que culminou no desenvolvimento de um produto tecnológico real, o sistema TEia, voltado à resolução de problemas práticos de comunicação entre família e escola no cenário da neurodivergência. Segundo \citeonline{prodanov2013}, a pesquisa aplicada caracteriza-se pelo interesse na aplicação e nas consequências práticas do conhecimento.
 
 Em relação aos objetivos, trata-se de um estudo de caráter exploratório que, conforme define \citeonline{gil2002}, visa desenvolver e esclarecer conceitos para proporcionar uma visão geral sobre um determinado fato. Neste trabalho, a etapa exploratória consolida-se através da revisão bibliográfica e da análise de sistemas similares, processos fundamentais para mapear as lacunas tecnológicas e pedagógicas do mercado educacional.
 
@@ -18,11 +18,12 @@ A abordagem metodológica estruturante é qualitativa. O foco central não resid
 
 Diferentemente de propostas delimitadas apenas à concepção e especificação técnica, o escopo deste projeto contemplou a implementação integral da ferramenta. A autora avançou de forma autônoma da etapa de prototipagem de alta fidelidade para a codificação completa da aplicação web responsiva. Dessa forma, o sistema foi estruturado e integrado de ponta a ponta. Com o intuito de assegurar a viabilidade e a eficácia da solução, toda a arquitetura foi desenhada em consonância com as normativas do Instituto Federal de Brasília (IFB), garantindo que os \textit{cards} de manejo proativo e o compartilhamento de registros impactem positivamente a rotina dos docentes e fortaleçam o vínculo com os familiares das crianças neurodivergentes.
 
+Por fim, cumpre ressaltar que, em conformidade com as boas práticas de transparência na pesquisa acadêmica, a revisão ortográfica, gramatical e o polimento textual deste documento contaram com o suporte do assistente de inteligência artificial Gemini \cite{google2026gemini}. A utilização da ferramenta restringiu-se à adequação linguística e estrutural da escrita, preservando integralmente a autoria, a originalidade e o rigor científico das ideias aqui desenvolvidas.
+
 \vspace{0.5cm}
-\section{Instrumentos de Pesquisa e Levantamento de Requisitos}
+\section{Instrumentos de Pesquisa}
 
 Para o levantamento de requisitos e a compreensão aprofundada do contexto escolar e familiar de alunos com TDAH e TOD, o presente estudo apoiou-se em instrumentos metodológicos diversificados. A escolha destas ferramentas fundamentou-se na necessidade de captar as percepções dos utilizadores, observar a dinâmica do ambiente educacional e validar a solução tecnológica proposta. 
-\vspace{0.3cm}
 
 No contexto deste trabalho, as entrevistas semiestruturadas, fundamentadas em \citeonline{gil2002}, permitiram explorar de maneira flexível as percepções dos participantes, combinando perguntas abertas com tópicos previamente definidos. Isso favoreceu respostas detalhadas e espontâneas, essenciais para captar as necessidades comunicativas e as expectativas de familiares e educadores. Além disso, a observação participante e as visitas em campo viabilizaram a análise do comportamento dos sujeitos em seu ambiente natural \cite{creswell2014}. Esse instrumento foi fundamental para entender a dinâmica real da sala de aula, as estratégias já utilizadas pelos professores e as reações espontâneas no suporte às neurodivergências.
 
@@ -30,9 +31,9 @@ Paralelamente, a aplicação de um questionário \textit{online} estruturado via
 
 Em primeiro lugar, os educadores manifestaram a preocupação de que a plataforma pudesse tornar-se apenas mais um meio de registro passivo, funcionando como uma versão digital do tradicional "livro de atas". Para mitigar esta questão, definiu-se que o sistema assumiria uma postura proativa, fornecendo sugestões, exemplos de manejo comportamental e estratégias de intervenção baseadas em evidências para auxiliar no suporte a alunos com TDAH e TOD.
 
-Em segundo lugar, o levantamento expôs um obstáculo infraestrutural: a recusa de alguns docentes em utilizar seus celulares e redes de dados pessoais para o trabalho. No entanto, constatou-se que as escolas estão equipadas com computadores. Para contornar essa limitação técnica, decidiu-se que o projeto seria desenvolvido sob a arquitetura de uma \textbf{Aplicação Web Responsiva}, permitindo o acesso via navegador nos computadores institucionais da escola, enquanto se adapta perfeitamente aos celulares das famílias para acompanhamento ágil.
+Em segundo lugar, o levantamento expôs um obstáculo infraestrutural: a recusa de alguns docentes em utilizar seus celulares e redes de dados pessoais para o trabalho. No entanto, constatou-se que as escolas estão equipadas com computadores. Para contornar essa limitação técnica, decidiu-se que o projeto seria desenvolvido sob a arquitetura de uma Aplicação Web Responsiva, permitindo o acesso via navegador nos computadores institucionais da escola, enquanto se adapta perfeitamente aos celulares das famílias para acompanhamento ágil.
 
-Portanto, diante dessas definições, avançou-se numa primeira etapa para a prototipagem de alta fidelidade (construída no Figma), que atuou como instrumento visual de validação. A partir do \textit{feedback} sobre a acessibilidade cognitiva e usabilidade da interface, o projeto prosseguiu de forma contínua para a fase de codificação e estruturação completa do sistema TEia.
+Portanto, diante dessas definições, avançou-se numa primeira etapa para a prototipagem de alta fidelidade (construída no Figma), que atuou como instrumento visual de validação. A partir do \textit{feedback} sobre a acessibilidade cognitiva e usabilidade da interface, o projeto prosseguiu de forma contínua para a fase de codificação e estruturação completa do sistema.
 
 \vspace{0.5cm}
 \section{Arquitetura do Sistema e Tecnologias Adotadas}
@@ -47,6 +48,7 @@ O \textit{back-end} e o banco de dados foram integrados utilizando o ecossistema
 \section{Perfis de Usuário e Controle de Acesso}
 
 Visando respeitar rigorosamente a privacidade e o sigilo dos dados dos estudantes, a arquitetura do sistema instituiu três perfis de acesso isolados:
+
 \begin{itemize}
     \item \textbf{Educadores:} Perfil com acesso validado por e-mail institucional (\texttt{@ifb.edu.br}). O isolamento de dados no \textit{Firestore} garante que cada docente gerencie apenas as suas turmas, registre ocorrências e acesse as sugestões de manejo proativo.
     \item \textbf{Gestão Escolar (Administração):} Painel global com privilégios de "somente leitura" para a coordenação pedagógica visualizar estatísticas e ocorrências da escola inteira, sem risco de edição.
@@ -56,7 +58,7 @@ Visando respeitar rigorosamente a privacidade e o sigilo dos dados dos estudante
 \vspace{0.5cm}
 \section{Coleta e Análise de Dados: O Estudo de Caso}
 
-Nesta etapa, define-se como os dados coletados pelos instrumentos de pesquisa foram processados e interpretados, a partir do uso experimental e da validação do sistema funcional nas dependências do Instituto Federal de Brasília, por meio de um \textbf{Estudo de Caso}. Durante a condução deste estudo, registraram-se as reações espontâneas dos educadores e familiares, eventuais dificuldades de navegação na interface web, preferências de \textit{layout} e o nível de compreensão das funcionalidades propostas na aplicação (TEia). As entrevistas semiestruturadas complementaram esses dados, fornecendo impressões detalhadas dos professores e responsáveis sobre a utilidade prática da plataforma no cotidiano.
+Nesta etapa, define-se como os dados coletados pelos instrumentos de pesquisa foram processados e interpretados, a partir do uso experimental e da validação do sistema funcional nas dependências do Instituto Federal de Brasília, por meio de um Estudo de Caso. Durante a condução deste estudo, registraram-se as reações espontâneas dos educadores e familiares, eventuais dificuldades de navegação na interface web, preferências de \textit{layout} e o nível de compreensão das funcionalidades propostas na aplicação (TEia). As entrevistas semiestruturadas complementaram esses dados, fornecendo impressões detalhadas dos professores e responsáveis sobre a utilidade prática da plataforma no cotidiano.
 
 As sessões de observação e as visitas em campo, inerentes ao estudo de caso, permitiram acompanhar a dinâmica escolar em tempo real, documentando os comportamentos, as estratégias de interação adotadas pelos docentes no manejo do TDAH e do TOD, bem como as limitações enfrentadas no modelo tradicional de registro de ocorrências.
 

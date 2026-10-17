@@ -161,29 +161,36 @@ O sistema web "Sequência Mágica", desenvolvido como pesquisa acadêmica no Ins
 As principais funcionalidades do sistema baseiam-se na criação interativa de sequências visuais. A plataforma permite que o usuário selecione blocos representativos de ações do dia a dia (como "acordar", "tomar banho" e "escovar os dentes") e os posicione na ordem correta utilizando o recurso de arrastar e soltar (drag and drop). Além disso, o software possui recursos para salvar a rotina montada no armazenamento local do navegador (localStorage), permitindo a visualização, restauração ou exclusão de sequências previamente configuradas e associadas à data atual.
 
 A Figura 2.4 apresenta as telas principais do protótipo do sistema Sequência Mágica. Em relação à usabilidade, o aplicativo adota uma interface voltada para a acessibilidade cognitiva do público infantil, priorizando a clareza visual e a simplicidade de navegação. Como pode ser observado na tela de início (a), há o uso de personagens lúdicos e cores suaves que geram empatia imediata. Já na tela de montagem da sequência (b), a estruturação utiliza uma barra lateral com blocos de rotina diária (como acordar e tomar banho), representados por pictogramas coloridos e legendas simples. Essa disposição limpa e interativa no painel principal permite que a criança acompanhe e estruture o seu próprio dia de forma intuitiva, promovendo a previsibilidade e evitando a sobrecarga sensorial.
-\begin{figure}[H] 
+
+\begin{figure}[H]
+  \centering
+  \caption{Telas principais do protótipo de Sequência Mágica}
+  % <-- Legenda ÚNICA no topo
+  \label{fig:telas_dbt}
+  \vspace{0.3cm}
+
+  % --- Imagem A (Maior largura por ser horizontal) ---
+  \begin{minipage}[b]{0.60\textwidth}
     \centering
-    \caption{Telas principais do protótipo de Sequência Mágica} % <-- Legenda ÚNICA no topo
-    \label{fig:telas_dbt}
-    \vspace{0.3cm}
-    
-    % --- Imagem A ---
-    \begin{minipage}[b]{0.46\textwidth}
-        \centering
-        \includegraphics[height=9cm, keepaspectratio]{dados/figuras/telaSequenciaMagica_1} 
-        \centerline{\small (a) Tela de início} % <-- Subtítulo A
-    \end{minipage}\hfill
-    % --- Imagem B ---
-    \begin{minipage}[b]{0.46\textwidth}
-        \centering
-        \includegraphics[height=9cm, keepaspectratio]{dados/figuras/telaSequenciaMagica_2}
-        \centerline{\small (b)  Tela de montagem da sequência dos cards} % <-- Subtítulo B
-    \end{minipage}
-    
-   \vspace{0.3cm}
-    \begin{flushleft} % <-- Inicia o alinhamento à esquerda
-   \footnotesize{Fonte: Silva (2025, p. 30, 31).} % <-- Fonte ÚNICA no final
- \end{flushleft}   
+    \includegraphics[width=\textwidth, keepaspectratio]
+    {dados/figuras/telaSequenciaMagica_1}
+    \vspace{0.1cm}
+    \centerline{\small (a) Tela de início} % <-- Subtítulo A
+  \end{minipage}\hfill
+  % --- Imagem B (Menor largura por ser vertical) ---
+  \begin{minipage}[b]{0.35\textwidth}
+    \centering
+    \includegraphics[width=\textwidth, keepaspectratio]
+    {dados/figuras/telaSequenciaMagica_2}
+    \vspace{0.1cm}
+    \centerline{\small (b) Tela de montagem da sequência
+    dos cards} % <-- Subtítulo B
+  \end{minipage}
+
+  \vspace{0.3cm}
+  \begin{flushleft} % <-- Inicia o alinhamento à esquerda
+  \footnotesize{Fonte: Silva (2025, p. 30, 31).} % <-- Fonte ÚNICA no final
+  \end{flushleft}
 \end{figure}
 
 \vspace{0.2cm}
