@@ -1,0 +1,68 @@
+% ----------------------------------------------------------------------------
+%                             RESULTADOS
+% ----------------------------------------------------------------------------
+\chapter{Resultados}
+\label{chap:Resultados E Interfaces Do Sistema}
+
+Este capítulo apresenta os relatos do processo de desenvolvimento, as dificuldades, os desafios técnicos enfrentados e a descrição das interfaces codificadas que compõem o sistema TEia. Na tarefa de desenvolvimento do projeto, foi necessário um estudo aprofundado da manipulação nativa do \textit{Document Object Model} (DOM) utilizando \textit{Vanilla JS}, da separação de responsabilidades (\textit{Clean Code}) e da estruturação visual responsiva (\textit{Mobile-First}) através de CSS Grid e Flexbox.
+
+Esses estudos permitiram afastar a complexidade excessiva (\textit{over-engineering}) inerente a \textit{frameworks} robustos (como ReactJS ou NextJS) em prol de uma aplicação leve, ágil e focada na baixa carga cognitiva. A decisão por tecnologias web puras garantiu total autonomia sobre a arquitetura e facilitou a adaptação direta das regras de negócio.
+
+A seguir, será demonstrado como se deu o desafio de integrar a manipulação de estados via \textit{localStorage} e as lógicas de acesso condicional às interfaces, garantindo que os requisitos funcionais delineados no capítulo anterior fossem traduzidos em fluxos visuais que efetivamente suportam o manejo comportamental de alunos com TDAH e TOD.
+
+\vspace{0.5cm}
+\section{Retrospectiva e Desafios}
+
+A partir do planejamento do projeto, detalhado no cronograma apresentado na Seção 4.1, foi realizado um rigoroso levantamento de requisitos de usuário, funcionais e não funcionais. Essa etapa possibilitou uma compreensão profunda do cenário educacional e direcionou a proposta de desenvolvimento do sistema TEia. As fases de análise de projeto permitiram o entendimento e a criação do diagrama de casos de uso macro do sistema. Posteriormente, as telas da aplicação foram prototipadas em alta fidelidade no Figma para o enriquecimento visual e a validação dos requisitos levantados, propiciando um amadurecimento da visão do usuário sobre a interação com a plataforma.
+
+Ao iniciar a etapa de estudos das tecnologias elencadas para o desenvolvimento, o projeto deparou-se com o desafio da escolha arquitetônica. Inicialmente, havia a intenção de utilizar bibliotecas baseadas em componentes, como o React.js. Contudo, direcionando esforços para a compreensão da infraestrutura escolar e do perfil dos utilizadores, identificou-se a oportunidade e a necessidade de adotar o JavaScript puro (\textit{Vanilla JS}). Essa decisão exigiu a superação de desafios técnicos ligados à manipulação nativa do \textit{Document Object Model} (DOM) e à manutenção de um código modular e limpo (\textit{Clean Code}), permitindo uma melhor adequação, leveza e alta performance nos computadores institucionais.
+
+O desenvolvimento da solução exigiu intenso esforço e dedicação, em virtude do desafio de codificar as principais funcionalidades do sistema a partir do zero. Destacam-se, nesse processo, a implementação do motor de busca com filtros combinados instantâneos operando diretamente no lado do cliente, a integração do \textit{back-end} via Firebase para a sincronização em tempo real da linha do tempo (\textit{timeline}) familiar, e a estruturação lógica para a geração automatizada de relatórios em PDF.
+
+A estratégia de implementação da solução baseada em uma Arquitetura Web Responsiva, com \textit{design Mobile-First}, permitiu agregar ao projeto a flexibilidade necessária. Essa abordagem garantiu o acesso ágil tanto pelo navegador \textit{web} (computador do educador na escola) quanto pelo dispositivo móvel (pais acompanhando a rotina em casa), contornando a resistência inicial dos docentes em efetuar \textit{downloads} ou usar pacotes de dados pessoais, e adaptando o comportamento da aplicação perfeitamente a qualquer ecrã. Nas subseções a seguir, serão apresentados os resultados das interfaces de interação do projeto, bem como a explanação das funcionalidades implementadas.
+
+\vspace{0.5cm}
+\section{Interfaces do Sistema}
+
+Esta seção apresenta as capturas de tela (\textit{screenshots}) das interfaces finais codificadas para a aplicação web TEia. O \textit{design} implementado reflete a arquitetura \textit{Mobile-First}, evidenciando a responsividade nativa construída com HTML5 e CSS3, que permite a adaptação visual fluida tanto para \textit{desktops} (computadores institucionais) quanto para \textit{smartphones} (dispositivos móveis das famílias).
+
+\vspace{0.5cm}
+\subsection{Autenticação e Controle de Acesso}
+
+A Figura 5.1 apresenta a interface de autenticação (\textit{login}) da plataforma. Nesta tela, o usuário é recebido por uma interface minimalista e acolhedora, cujo objetivo é reduzir a carga cognitiva desde o primeiro contato. O destaque central da interface é a seleção do perfil de acesso, permitindo que o usuário identifique-se de forma clara antes da inserção das credenciais.
+
+A segregação inicial não é apenas um recurso visual, mas o gatilho para as regras de negócio estruturadas no \textit{back-end} via \textit{Firebase Authentication}. Ao selecionar o perfil de "Educador", o sistema aciona uma validação rigorosa, bloqueando tentativas de acesso com e-mails genéricos e exigindo, obrigatoriamente, o uso do domínio institucional da escola (\texttt{@ifb.edu.br}). Abaixo dos botões de perfil, encontram-se os campos padronizados para a inserção de e-mail e senha, atalhos para recuperação de acesso e a opção de novo cadastro.
+
+\begin{figure}[H]
+    \centering
+    \caption{Tela de login}
+    \label{assets: telaLogin_desktop}
+    
+    \vspace{0.2cm}
+    
+   \includegraphics[width=0.9\textwidth, keepaspectratio]{assets/telaLogin_desktop}
+   \centerline{\small (a) Desktop}
+    
+    \vspace{0.2cm}
+    
+    \begin{flushleft}
+        \footnotesize Fonte: Elaborada pela autora (2026).
+    \end{flushleft}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \caption{Tela de login}
+    \label{assets: telaLogin_desktop}
+    
+    \vspace{0.2cm}
+    
+   \includegraphics[width=0.3\textwidth, keepaspectratio]{assets/telaLogin_mobile}
+   \centerline{\small (b) Mobile}
+    
+    \vspace{0.2cm}
+    
+    \begin{flushleft}
+        \footnotesize Fonte: Elaborada pela autora (2026).
+    \end{flushleft}
+\end{figure}
