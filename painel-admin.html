@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEia - Gestão Escolar</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- CONTAINER GLOBAL (O mesmo que divide a tela em coluna e conteúdo) -->
+    <div class="app-container">
+        
+        <!-- COLUNA LATERAL (MENU) -->
+        <aside class="sidebar">
+            <div class="perfil-usuario">
+                <i class="fa-solid fa-shield-halved icone-perfil-sidebar"></i>
+                <h3 id="nome-usuario-sidebar">Administração Global</h3>
+                <p>Gestão Escolar</p>
+            </div>
+
+            <nav class="menu-lateral">
+                <a href="painel-admin.html" class="item-menu ativo">
+                    <i class="fa-solid fa-chart-line"></i> Visão Geral
+                </a>
+            </nav>
+
+            <button id="btn-sair" class="btn-sair-sidebar">
+                <i class="fa-solid fa-right-from-bracket"></i> Sair
+            </button>
+        </aside>
+
+        <!-- ÁREA PRINCIPAL À DIREITA -->
+        <main class="main-content">
+            
+            <header class="cabecalho-painel">
+                <div class="titulo-pagina">
+                    <h1>Visão Global da Gestão</h1>
+                    <p>Monitoramento de todas as turmas da instituição</p>
+                </div>
+            </header>
+
+            <div class="conteudo-scroll">
+                
+                <!-- Filtros Globais -->
+                <section class="area-filtros barra-filtros">
+                    <input type="text" id="filtro-nome" placeholder="Nome do estudante..." class="input-filtro">
+                    <select id="filtro-turma" class="select-filtro">
+                        <option value="">Todas as turmas</option>
+                    </select>
+                    <input type="text" id="filtro-neuro" placeholder="Filtro neurodivergência..." class="input-filtro">
+                    <input type="date" id="filtro-data-inicio" class="input-filtro">
+                    <input type="date" id="filtro-data-fim" class="input-filtro">
+                    <button id="btn-limpar-filtros" class="btn-limpar">Limpar Filtros</button>
+                </section>
+
+                <!-- Resultados da Busca Global -->
+                <section id="secao-resultados" class="oculto">
+                    <h2 class="subtitulo-secao">Estudantes Encontrados</h2>
+                    <div id="grid-resultados-alunos" class="grid-turmas"></div>
+                </section>
+
+                <!-- Listagem de Todas as Turmas da Escola -->
+                <section class="area-turmas">
+                    <h2 class="subtitulo-secao">Todas as Turmas Cadastradas</h2>
+                    <div id="grid-turmas" class="grid-turmas"></div>
+                </section>
+                
+            </div> <!-- Fim conteudo-scroll -->
+
+        </main>
+    </div> <!-- Fim app-container -->
+
+    <script type="module" src="painel-admin.js"></script>
+</body>
+</html>
