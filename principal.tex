@@ -23,6 +23,7 @@
 % ---------------------------------------------------------------------------------------------------------------
 \input{configuracoes/pacotes}
 \input{configuracoes/config-pdf}
+\usepackage{pdfpages}
 
 % ---------------------------------------------------------------------------------------------------------------
 %                                 INCLUI ARQUIVOS DO TRABALHO DE CONCLUSÃO DE CURSO
@@ -69,11 +70,13 @@
     % Insere elementos pós-textuais
     \include{estrutura/pos-textuais/referencias}           			   % Referências
     \addcontentsline{toc}{chapter}{APÊNDICES} % Adiciona a palavra APÊNDICES ao Sumário
+% Início dos Apêndices
 \begin{apendicesenv}
+\partapendices % Cria uma página separadora (opcional, dependendo do seu template)
 
+% Seu primeiro apêndice (o questionário que já existia)
 \chapter{Questionário de Levantamento de Requisitos e Necessidades com Educadores}
-\label{ap:questionario_educadores}
-
+\label{apendice:questionario}
 Este apêndice apresenta o instrumento de pesquisa (questionário) estruturado e direcionado a professores e profissionais da educação, com o objetivo de coletar informações sobre as principais dores, desafios na rotina escolar e requisitos funcionais para o suporte ao manejo comportamental de alunos com TDAH e TOD.
 
 \begin{enumerate}
@@ -124,6 +127,18 @@ Este apêndice apresenta o instrumento de pesquisa (questionário) estruturado e
         \item[ ] Pouco útil.
     \end{itemize}
 \end{enumerate}
+
+% Seu segundo apêndice (A Portaria do TEiA)
+\chapter{Portaria do Projeto TEiA (TED MEC 16162/2025)}
+\label{apendice:portaria_teia}
+
+A seguir é apresentada a portaria referente ao Termo de Execução Descentralizada (TED MEC 16162/2025), que fundamenta o Projeto TEiA (Formação Continuada em Inclusão e Suporte para Estudantes com TEA e Neuroatípicos) e institui as diretrizes normativas para o acompanhamento educacional no âmbito do Instituto Federal de Brasília.
+
+% O comando abaixo vai puxar o PDF e anexar no TCC. 
+% pages=- (importa todas as páginas da portaria)
+% scale=0.85 (reduz o tamanho um pouco para caber o cabeçalho e rodapé do seu TCC)
+% pagecommand={} (mantém a numeração de páginas do seu TCC nas folhas do anexo)
+\includepdf[pages=-, scale=0.85, pagecommand={}]{portaria_teia.pdf}
 
 \end{apendicesenv}
 
