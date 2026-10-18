@@ -1395,3 +1395,33 @@ body {
     color: #888;
     margin-top: 6px;
 }
+
+/* ==========================================
+   TEMA VISUAL EXCLUSIVO DA GESTÃO (Azul Marinho)
+   ========================================== */
+body.tema-gestao .menu-lateral {
+    background-color: #1e3a8a; 
+}
+
+body.tema-gestao .menu-links a.ativo {
+    background-color: #172554; 
+    border-left-color: #60a5fa; 
+}
+
+body.tema-gestao .menu-links a:hover {
+    background-color: #1e40af;
+}
+
+body.tema-gestao .btn-nova-ocorrencia,
+body.tema-gestao .btn-limpar {
+    background-color: #1e3a8a;
+}
+
+body.tema-gestao .btn-nova-ocorrencia:hover,
+body.tema-gestao .btn-limpar:hover {
+    background-color: #172554;
+}
+
+body.tema-gestao .icone-titulo {
+    color: #1e3a8a;
+}

@@ -8,7 +8,7 @@ import { signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/
 onAuthStateChanged(auth, (user) => {
     const perfil = localStorage.getItem('perfilLogado');
     if (!user || perfil !== 'Administrador') {
-        window.location.href = 'index.html';
+        window.location.replace('index.html');
     } else {
         inicializarPainelGestao();
     }
@@ -30,12 +30,22 @@ let listaTodasOcorrencias = [];
 
 async function inicializarPainelGestao() {
     try {
-        // 1. BUSCA TODAS AS TURMAS DA ESCOLA (Sem filtro de professor)
         const turmasQuery = query(collection(db, "turmas"));
         const snapshotTurmas = await getDocs(turmasQuery);
-        
-        let todasTurmas = [];
-        snapshotTurmas.forEach(doc => todasTurmas.push(doc.data()));
+
+        // 1. Usar um Map para garantir que não teremos pastas repetidas no ecrã
+        let mapaTurmasUnicas = new Map();
+
+        snapshotTurmas.forEach(doc => {
+            const dados = doc.data();
+            // Se a turma tem nome e ainda não foi registada no nosso mapa, guardamos
+            if (dados.nome && !mapaTurmasUnicas.has(dados.nome)) {
+                mapaTurmasUnicas.set(dados.nome, dados);
+            }
+        });
+
+        // 2. Transformar o Mapa de volta numa lista e ordenar alfabeticamente
+        let todasTurmas = Array.from(mapaTurmasUnicas.values());
         todasTurmas.sort((a, b) => a.nome.localeCompare(b.nome));
 
         gridTurmas.innerHTML = '';
@@ -45,11 +55,13 @@ async function inicializarPainelGestao() {
             gridTurmas.innerHTML = '<div class="area-vazia"><p>Nenhuma turma cadastrada na instituição.</p></div>';
         } else {
             todasTurmas.forEach(turma => {
+                // Preenche a caixa de seleção para os filtros
                 const option = document.createElement('option');
                 option.value = turma.nome;
                 option.textContent = turma.nome;
                 selectTurma.appendChild(option);
 
+                // Cria o Cartão (Pasta) único para cada turma
                 const cartao = document.createElement('div');
                 cartao.className = 'cartao-aluno';
                 cartao.innerHTML = `
@@ -59,17 +71,17 @@ async function inicializarPainelGestao() {
                     </div>
                     <i class="fa-solid fa-chevron-right icone-seta-direita"></i>
                 `;
-                
+
                 cartao.addEventListener('click', () => {
                     localStorage.setItem('turma_selecionada', turma.nome);
-                    window.location.href = 'lista-alunos.html'; 
+                    window.location.href = 'lista-alunos.html';
                 });
-                
+
                 gridTurmas.appendChild(cartao);
             });
         }
 
-        // 2. BUSCA TODOS OS ALUNOS DA ESCOLA
+        // BUSCA TODOS OS ESTUDANTES DA ESCOLA (para a pesquisa rápida)
         const snapshotAlunos = await getDocs(collection(db, "alunos"));
         listaTodosAlunos = [];
         snapshotAlunos.forEach(doc => {
@@ -78,7 +90,7 @@ async function inicializarPainelGestao() {
             listaTodosAlunos.push(dados);
         });
 
-        // 3. BUSCA TODAS AS OCORRÊNCIAS GLOBAIS
+        // BUSCA TODAS AS OCORRÊNCIAS GLOBAIS
         const snapshotOcorrencias = await getDocs(collection(db, "ocorrencias"));
         listaTodasOcorrencias = [];
         snapshotOcorrencias.forEach(doc => {
@@ -86,8 +98,8 @@ async function inicializarPainelGestao() {
         });
 
     } catch (error) {
-        console.error("Erro ao carregar gestão:", error);
-        gridTurmas.innerHTML = '<p class="texto-erro">Erro ao carregar dados institucionais.</p>';
+        console.error("Erro ao carregar a gestão:", error);
+        gridTurmas.innerHTML = '<p class="texto-erro">Erro ao carregar os dados institucionais.</p>';
     }
 }
 

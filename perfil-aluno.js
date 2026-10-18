@@ -3,12 +3,42 @@ import { collection, getDocs, query, where, deleteDoc, doc, updateDoc } from "ht
 import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.13.0/firebase-auth.js";
 
 // ==========================================
-// TRAVA DE SEGURANÇA (ROTA DO EDUCADOR)
+// TRAVA DE SEGURANÇA E ADAPTAÇÃO VISUAL (GESTÃO)
 // ==========================================
 onAuthStateChanged(auth, (user) => {
     const perfil = localStorage.getItem('perfilLogado');
-    if (!user || perfil !== 'Educador') {
+    
+    // 1. Permite acesso para Educador OU Administrador
+    if (!user || (perfil !== 'Educador' && perfil !== 'Administrador')) {
         window.location.href = 'index.html';
+        return;
+    }
+
+    // 2. MODO LEITURA E TEMA ESCURO: Se for Gestão, adapta a tela
+    if (perfil === 'Administrador') {
+        // Aplica o tema corporativo escuro
+        document.body.classList.add('tema-gestao');
+        
+        // --- ADAPTA O MENU LATERAL PARA A GESTÃO ---
+        const subtituloMenu = document.querySelector('.menu-cabecalho p');
+        if (subtituloMenu) subtituloMenu.textContent = 'Gestão Escolar';
+
+        const menuLateral = document.querySelector('.menu-links');
+        if (menuLateral) {
+            menuLateral.innerHTML = `
+                <li><a href="painel-admin.html" class="ativo"><i class="fa-solid fa-chart-line"></i> Visão Global da Gestão</a></li>
+            `;
+        }
+        // -------------------------------------------
+        
+        // Esconde as ferramentas de edição
+        const btnExcluirAluno = document.getElementById('btn-excluir-aluno');
+        const btnAbrirRealocacao = document.getElementById('btn-abrir-realocacao');
+        const btnNovaOcorrencia = document.querySelector('.btn-nova-ocorrencia'); 
+
+        if (btnExcluirAluno) btnExcluirAluno.style.display = 'none';
+        if (btnAbrirRealocacao) btnAbrirRealocacao.style.display = 'none';
+        if (btnNovaOcorrencia) btnNovaOcorrencia.style.display = 'none';
     }
 });
 
@@ -231,6 +261,27 @@ if (btnConfirmarRealocacao) {
             alert("Erro ao tentar transferir o estudante.");
             btnConfirmarRealocacao.innerHTML = '<i class="fa-solid fa-check"></i> Confirmar';
             btnConfirmarRealocacao.disabled = false;
+        }
+    });
+}
+
+// ==========================================
+// ROTEAMENTO INTELIGENTE DO BOTÃO VOLTAR
+// ==========================================
+// Pega o botão "Voltar para a Turma" (que é um link <a> com classe link-voltar no seu HTML)
+const linkVoltar = document.querySelector('.link-voltar');
+
+if (linkVoltar) {
+    linkVoltar.addEventListener('click', (e) => {
+        e.preventDefault(); 
+        const perfilAtual = localStorage.getItem('perfilLogado');
+        
+        // Se for gestor, a gente garante que volte para o painel de turmas seguro da gestão, 
+        // ou você pode direcionar de volta pra lista de alunos normal.
+        if (perfilAtual === 'Administrador') {
+            window.location.href = 'lista-alunos.html'; 
+        } else {
+            window.location.href = 'lista-alunos.html';
         }
     });
 }

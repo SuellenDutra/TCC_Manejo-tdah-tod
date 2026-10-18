@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel Inicial - Manejo Inclusivo</title>
+    <title>Painel Inicial - Gestão Escolar</title>
     
-    <!-- TRAVA DE SEGURANÇA IMEDIATA (Evita o piscar da tela) -->
+    <!-- TRAVA DE SEGURANÇA IMEDIATA DA GESTÃO -->
     <script>
-        if (localStorage.getItem('perfilLogado') !== 'Educador') {
+        if (localStorage.getItem('perfilLogado') !== 'Administrador') {
             window.location.replace('index.html');
         }
     </script>
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body class="tema-gestao">
 
     <div class="layout-admin">
         
@@ -24,12 +24,11 @@
             <div class="menu-cabecalho">
                 <i class="fa-solid fa-school"></i>
                 <h2>Projeto TEiA</h2>
-                <p>Manejo Inclusivo</p>
+                <p>Gestão Escolar</p>
             </div>
             
             <ul class="menu-links">
-                <li><a href="turma.html" class="ativo"><i class="fa-solid fa-magnifying-glass-chart"></i>Visão Global da Gestão</a></li>
-                <li><a href="cadastrar-turma.html"><i class="fa-solid fa-folder-plus"></i>Todas as Turmas da Instituição</a></li>
+                <li><a href="painel-admin.html" class="ativo"><i class="fa-solid fa-magnifying-glass-chart"></i>Visão Global da Gestão</a></li>
             </ul>
 
             <div class="menu-rodape">
@@ -43,14 +42,14 @@
         <main class="conteudo-principal">
             
             <div class="cabecalho-painel">
-                <h1 class="titulo-painel">Painel Geral e Consultas</h1>
-                <p class="subtitulo">Pesquise estudantes rapidamente com os filtros abaixo ou acesse as pastas das turmas.</p>
+                <h1 class="titulo-painel">Visão Global da Gestão</h1>
+                <p class="subtitulo">Monitoramento de todas as turmas e estudantes da instituição.</p>
             </div>
 
-            <!-- BARRA DE FILTROS E BUSCA RÁPIDA NA TELA INICIAL -->
+            <!-- BARRA DE FILTROS E BUSCA RÁPIDA -->
             <section class="painel-filtros">
                 <h2 class="titulo-secao-painel">
-                    <i class="fa-solid fa-filter icone-titulo"></i> Busca Rápida e Filtros Dinâmicos
+                    <i class="fa-solid fa-filter icone-titulo"></i> Busca Rápida e Filtros
                 </h2>
                 
                 <div class="grid-filtros">
@@ -68,7 +67,7 @@
 
                     <div class="campo-filtro">
                         <label class="rotulo-filtro" for="filtro-neuro">Neurodivergência</label>
-                        <input type="text" id="filtro-neuro" class="input-filtro" placeholder="Ex: TDAH, TOD, TEA">
+                        <input type="text" id="filtro-neuro" class="input-filtro" placeholder="Ex: TDAH, TOD">
                     </div>
 
                     <div class="campo-filtro">
@@ -89,7 +88,7 @@
                 </div>
             </section>
 
-            <!-- RESULTADOS DA BUSCA DE ALUNOS (Aparece quando o professor usa algum filtro) -->
+            <!-- RESULTADOS DA BUSCA DE ALUNOS -->
             <section id="secao-resultados" class="secao-resultados-busca oculto">
                 <h2 class="titulo-secao-painel">
                     <i class="fa-solid fa-user-check icone-titulo"></i> Estudantes Encontrados
@@ -100,7 +99,7 @@
             <!-- PASTAS DAS TURMAS -->
             <section>
                 <h2 class="titulo-secao-painel">
-                    <i class="fa-solid fa-folder-tree icone-titulo"></i> Minhas Turmas
+                    <i class="fa-solid fa-folder-tree icone-titulo"></i> Todas as Turmas Cadastradas
                 </h2>
                 <div class="grid-alunos" id="grid-turmas">
                     <p class="texto-carregando"><i class="fa-solid fa-spinner fa-spin"></i> Buscando turmas...</p>

@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Painel Inicial - Manejo Inclusivo</title>
     
-    <!-- TRAVA DE SEGURANÇA IMEDIATA (Evita o piscar da tela) -->
-    <script>
-        if (localStorage.getItem('perfilLogado') !== 'Educador') {
-            window.location.replace('index.html');
-        }
-    </script>
+   <!-- TRAVA DE SEGURANÇA IMEDIATA (Libera Professor e Gestão) -->
+<script>
+    const perfilAtivo = localStorage.getItem('perfilLogado');
+    if (perfilAtivo !== 'Educador' && perfilAtivo !== 'Administrador') {
+        window.location.replace('index.html');
+    }
+</script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
